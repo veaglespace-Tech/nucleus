@@ -45,8 +45,9 @@ export default function DoctorsSection() {
   ];
 
   return (
-    <section className="bg-base-200 py-12 lg:py-16 rounded-[3rem] mx-4 sm:mx-6 lg:mx-8 shadow-inner overflow-hidden mb-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mb-12">
+      <section className="bg-base-200 py-12 lg:py-16 px-6 sm:px-12 rounded-[3rem] shadow-inner overflow-hidden">
+        <div className="w-full">
         <FadeIn delay={0.1} direction="up" className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
           <div className="max-w-2xl">
             <h2 className="text-4xl lg:text-5xl font-extrabold mb-6 text-base-content">Meet Our Expert Specialists</h2>
@@ -90,7 +91,8 @@ export default function DoctorsSection() {
             </StaggerItem>
           ))}
         </StaggerContainer>
-      </div>
-    </section>
+        </div>
+      </section>
+    </div>
   );
 }

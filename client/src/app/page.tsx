@@ -37,11 +37,11 @@ export default function Home() {
                 Nucleus Hospital brings together top-tier medical experts, state-of-the-art technology, and compassionate care to ensure you get the absolute best treatment possible.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Link href="/contact" className="btn border-0 bg-gradient-to-r from-primary to-accent hover:from-primary hover:to-secondary text-white btn-lg rounded-full shadow-xl shadow-primary/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 px-8">
+              <div className="flex flex-col sm:flex-row gap-4 pt-4 w-full">
+                <Link href="/contact" className="btn border-0 bg-gradient-to-r from-primary to-accent hover:from-primary hover:to-secondary text-white btn-lg rounded-full shadow-xl shadow-primary/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 w-full sm:w-auto px-8">
                   Book an Appointment
                 </Link>
-                <Link href="/services" className="btn btn-outline btn-lg rounded-full hover:-translate-y-1 hover:bg-base-200 hover:text-base-content transition-all duration-300 border-base-300 px-8">
+                <Link href="/services" className="btn btn-outline btn-lg rounded-full hover:-translate-y-1 hover:bg-base-200 hover:text-base-content transition-all duration-300 border-base-300 w-full sm:w-auto px-8">
                   Explore Services
                 </Link>
               </div>
@@ -140,10 +140,11 @@ export default function Home() {
       <ReviewsSection />
 
       {/* Features Section with Image */}
-      <section className="bg-neutral text-neutral-content py-12 lg:py-16 relative overflow-hidden rounded-[3rem] mx-4 sm:mx-6 lg:mx-8 shadow-2xl">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <section className="bg-neutral text-neutral-content py-12 px-6 sm:px-12 lg:py-20 lg:px-16 relative overflow-hidden rounded-[3rem] shadow-2xl">
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+          <div className="relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             
             {/* Left Content */}
             <div>
@@ -205,9 +206,10 @@ export default function Home() {
               </div>
             </div>
 
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* Dynamic Blogs Section */}
       <DynamicBlogsHome />
@@ -223,11 +225,11 @@ export default function Home() {
           <p className="text-xl text-primary-content/90 max-w-2xl mx-auto mb-10 leading-relaxed">
             Book an appointment with our expert doctors today and take the first step towards a healthier, happier life.
           </p>
-          <div className="flex justify-center gap-6">
-            <Link href="/contact" className="btn btn-base-100 text-primary btn-lg rounded-full shadow-xl px-10 hover:scale-105 transition-transform duration-300">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 w-full">
+            <Link href="/contact" className="btn btn-base-100 text-primary btn-lg rounded-full shadow-xl w-full sm:w-auto px-10 hover:scale-105 transition-transform duration-300">
               Book Appointment Now
             </Link>
-            <Link href="/about" className="btn btn-outline text-primary-content border-primary-content hover:bg-primary-content hover:text-primary btn-lg rounded-full px-10 hover:scale-105 transition-transform duration-300">
+            <Link href="/about" className="btn btn-outline text-primary-content border-primary-content hover:bg-primary-content hover:text-primary btn-lg rounded-full w-full sm:w-auto px-10 hover:scale-105 transition-transform duration-300">
               Learn About Us
             </Link>
           </div>
