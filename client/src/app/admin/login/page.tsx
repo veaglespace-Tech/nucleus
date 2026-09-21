@@ -68,7 +68,7 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-base-200/50 pt-32 pb-16 px-4 sm:px-6 lg:px-8 flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-[calc(100vh-80px)] bg-base-200/50 pt-20 pb-8 px-4 sm:px-6 lg:px-8 flex items-center justify-center relative overflow-hidden">
       {/* Abstract Background Orbs */}
       <div className="absolute top-0 left-0 w-[50rem] h-[50rem] bg-primary/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 -z-10 pointer-events-none"></div>
       <div className="absolute bottom-0 right-0 w-[50rem] h-[50rem] bg-secondary/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3 -z-10 pointer-events-none"></div>
@@ -76,12 +76,12 @@ export default function AdminLogin() {
       <div className="max-w-6xl w-full bg-base-100 rounded-[3rem] shadow-2xl shadow-primary/5 flex overflow-hidden border border-base-300/50 relative z-10">
         
         {/* Left Side: Form */}
-        <div className="w-full lg:w-5/12 p-10 sm:p-14 lg:p-16 flex flex-col justify-center">
-          <div className="mb-10">
-            <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-2xl mb-6">
-              <HeartPulse className="h-8 w-8 text-primary" />
+        <div className="w-full lg:w-5/12 p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
+          <div className="mb-6">
+            <div className="inline-flex items-center justify-center p-2 bg-primary/10 rounded-xl mb-4">
+              <HeartPulse className="h-6 w-6 text-primary" />
             </div>
-            <h2 className="text-4xl font-black text-base-content tracking-tight mb-2">
+            <h2 className="text-3xl font-black text-base-content tracking-tight mb-1">
               Welcome Back
             </h2>
             <p className="text-base-content/60 font-medium">
@@ -89,7 +89,7 @@ export default function AdminLogin() {
             </p>
           </div>
           
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-4" onSubmit={handleSubmit}>
             {error && (
               <div className="alert alert-error bg-error/10 text-error border-error/20 rounded-2xl p-4 text-sm font-medium">
                 Invalid credentials. Please try again.
@@ -101,7 +101,7 @@ export default function AdminLogin() {
               </div>
             )}
             
-            <div className="space-y-5">
+            <div className="space-y-3">
               <div className="form-control relative group">
                 <label className="label pb-1"><span className="label-text font-bold text-base-content/80 text-xs uppercase tracking-wider">Email or Username</span></label>
                 <div className="relative">
@@ -110,7 +110,7 @@ export default function AdminLogin() {
                     name="username"
                     type="text"
                     required
-                    className="input input-bordered w-full pl-12 bg-base-200/50 focus:bg-base-100 focus:border-primary focus:ring-4 ring-primary/10 transition-all rounded-2xl h-14"
+                    className="input input-bordered w-full pl-12 bg-base-200/50 focus:bg-base-100 focus:border-primary focus:ring-4 ring-primary/10 transition-all rounded-xl h-12"
                     placeholder="admin@nucleus.com"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
@@ -126,7 +126,7 @@ export default function AdminLogin() {
                     name="password"
                     type="password"
                     required
-                    className="input input-bordered w-full pl-12 bg-base-200/50 focus:bg-base-100 focus:border-primary focus:ring-4 ring-primary/10 transition-all rounded-2xl h-14"
+                    className="input input-bordered w-full pl-12 bg-base-200/50 focus:bg-base-100 focus:border-primary focus:ring-4 ring-primary/10 transition-all rounded-xl h-12"
                     placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -135,7 +135,7 @@ export default function AdminLogin() {
               </div>
 
               {/* Captcha Section */}
-              <div className="form-control mt-6 p-5 border border-base-200 rounded-2xl bg-gradient-to-br from-base-200/50 to-base-100 shadow-sm relative overflow-hidden group">
+              <div className="form-control mt-4 p-4 border border-base-200 rounded-xl bg-gradient-to-br from-base-200/50 to-base-100 shadow-sm relative overflow-hidden group">
                 <div className="absolute top-0 left-0 w-1 h-full bg-primary/40 group-hover:bg-primary transition-colors"></div>
                 <label className="label pt-0 pb-3"><span className="label-text font-bold text-xs uppercase tracking-wider">Security Check</span></label>
                 <div className="flex items-center gap-3">
@@ -162,7 +162,7 @@ export default function AdminLogin() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="btn btn-primary w-full rounded-2xl h-14 text-base font-bold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-1 transition-all group"
+                className="btn btn-primary w-full rounded-xl h-12 text-base font-bold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-1 transition-all group"
               >
                 {isLoading ? (
                   <span className="loading loading-spinner"></span>
@@ -192,9 +192,9 @@ export default function AdminLogin() {
           <div className="absolute inset-0 bg-primary/10 mix-blend-overlay"></div>
           
           {/* Text content on image */}
-          <div className="absolute bottom-16 left-16 right-16 p-10 bg-white/10 backdrop-blur-xl border border-white/20 rounded-[2.5rem] shadow-2xl">
-            <h3 className="text-3xl font-black text-white mb-3">Enterprise Healthcare Management</h3>
-            <p className="text-white/80 font-medium leading-relaxed text-lg">
+          <div className="absolute bottom-8 left-8 right-8 p-6 bg-white/10 backdrop-blur-xl border border-white/20 rounded-[2rem] shadow-2xl">
+            <h3 className="text-2xl font-black text-white mb-2">Enterprise Healthcare Management</h3>
+            <p className="text-white/80 font-medium leading-relaxed text-base">
               Streamline operations, manage patient records, and oversee hospital services through our next-generation secure administrative portal.
             </p>
           </div>
