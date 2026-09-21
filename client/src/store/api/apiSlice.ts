@@ -57,6 +57,10 @@ export const apiSlice = createApi({
       query: () => '/blogs',
       providesTags: ['Blog'],
     }),
+    getBlogById: builder.query({
+      query: (id) => `/blogs/${id}`,
+      providesTags: (result, error, id) => [{ type: 'Blog', id }],
+    }),
     createBlog: builder.mutation({
       query: (blog) => ({
         url: '/blogs',
@@ -119,6 +123,7 @@ export const {
   useUpdateServiceMutation,
   useDeleteServiceMutation,
   useGetBlogsQuery,
+  useGetBlogByIdQuery,
   useCreateBlogMutation,
   useUpdateBlogMutation,
   useDeleteBlogMutation,

@@ -33,7 +33,7 @@ export default function DynamicBlogsHome() {
       <StaggerContainer staggerDelay={0.15} className="grid grid-cols-1 md:grid-cols-3 gap-10">
         {blogs.slice(0, 3).map((blog: any) => (
           <StaggerItem key={blog.id} className="card glass-card hover:-translate-y-2 transition-transform duration-500 rounded-[2rem] overflow-hidden group">
-            <div className="relative h-56 w-full overflow-hidden bg-base-200">
+            <div className="relative h-56 w-full overflow-hidden bg-base-200 block">
               {blog.image ? (
                 <Image 
                   src={blog.image} 
@@ -46,26 +46,31 @@ export default function DynamicBlogsHome() {
                   No Image Provided
                 </div>
               )}
-              <div className="absolute top-4 left-4 bg-base-100/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-base-content shadow-sm flex items-center gap-1">
+              <div className="absolute top-4 left-4 bg-base-100/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-base-content shadow-sm flex items-center gap-2">
                 <Calendar className="h-3 w-3" />
                 {new Date(blog.createdAt).toLocaleDateString()}
+              </div>
+              <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">
+                {blog.type || 'Post'}
               </div>
             </div>
             
             <div className="card-body p-8">
-              <h3 className="card-title text-xl mb-3 line-clamp-2 leading-snug group-hover:text-primary transition-colors">
-                {blog.title}
-              </h3>
+              <Link href={`/blog/${blog.id}`}>
+                <h3 className="card-title text-xl mb-3 line-clamp-2 leading-snug group-hover:text-primary transition-colors cursor-pointer">
+                  {blog.title}
+                </h3>
+              </Link>
               <p className="text-base-content/70 leading-relaxed line-clamp-3 mb-6">
                 {blog.content}
               </p>
               
               <div className="card-actions justify-between items-center mt-auto pt-4 border-t border-base-200">
-                <Link href="/blog" className="font-semibold text-primary inline-flex items-center hover:underline group-hover:translate-x-1 transition-transform">
-                  Read Full Article <ArrowRight className="h-4 w-4 ml-1" />
+                <Link href={`/blog/${blog.id}`} className="font-semibold text-primary inline-flex items-center hover:underline group-hover:translate-x-1 transition-transform">
+                  Read Full {blog.type || 'Post'} <ArrowRight className="h-4 w-4 ml-1" />
                 </Link>
                 {blog.showContactBtn !== false && (
-                   <Link href="/contact" className="btn btn-primary btn-sm rounded-full shadow-md shadow-primary/20">
+                   <Link href="/contact" className="btn btn-primary btn-sm rounded-full shadow-md shadow-primary/20 z-10">
                      Contact Us
                    </Link>
                 )}

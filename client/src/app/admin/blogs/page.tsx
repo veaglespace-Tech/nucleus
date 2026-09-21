@@ -14,36 +14,38 @@ export default function BlogsManager() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
   
-  const [formData, setFormData] = useState({
-    title: '',
-    author: '',
-    content: '',
-    image: '',
-    showContactBtn: true
-  });
-
-  const handleOpenModal = (blog?: any) => {
-    if (blog) {
-      setEditingId(blog.id);
-      setFormData({
-        title: blog.title,
-        author: blog.author,
-        content: blog.content,
-        image: blog.image || '',
-        showContactBtn: blog.showContactBtn ?? true
-      });
-    } else {
+    const [formData, setFormData] = useState({
+      title: '',
+      author: '',
+      content: '',
+      image: '',
+      type: 'Post',
+      showContactBtn: true
+    });
+  
+    const handleOpenModal = (blog?: any) => {
+      if (blog) {
+        setEditingId(blog.id);
+        setFormData({
+          title: blog.title,
+          author: blog.author,
+          content: blog.content,
+          image: blog.image || '',
+          type: blog.type || 'Post',
+          showContactBtn: blog.showContactBtn ?? true
+        });
+      } else {
+        setEditingId(null);
+        setFormData({ title: '', author: '', content: '', image: '', type: 'Post', showContactBtn: true });
+      }
+      setIsModalOpen(true);
+    };
+  
+    const handleCloseModal = () => {
+      setIsModalOpen(false);
       setEditingId(null);
-      setFormData({ title: '', author: '', content: '', image: '', showContactBtn: true });
-    }
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setEditingId(null);
-    setFormData({ title: '', author: '', content: '', image: '', showContactBtn: true });
-  };
+      setFormData({ title: '', author: '', content: '', image: '', type: 'Post', showContactBtn: true });
+    };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -100,6 +102,7 @@ export default function BlogsManager() {
                 <tr>
                   <th>Image</th>
                   <th>Title</th>
+                  <th>Type</th>
                   <th>Author</th>
                   <th className="text-right">Actions</th>
                 </tr>
@@ -109,7 +112,7 @@ export default function BlogsManager() {
                   <tr key={blog.id} className="hover">
                     <td>
                       <div className="avatar">
-                        <div className="w-12 h-12 rounded-lg bg-base-200 flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-lg bg-base-200 flex items-center justify-center overflow-hidden">
                           {blog.image ? (
                             <Image src={blog.image} alt={blog.title} width={48} height={48} className="object-cover w-full h-full" />
                           ) : (
@@ -119,6 +122,11 @@ export default function BlogsManager() {
                       </div>
                     </td>
                     <td className="font-medium text-base-content max-w-xs truncate" title={blog.title}>{blog.title}</td>
+                    <td>
+                      <span className={`badge ${blog.type === 'Article' ? 'badge-secondary' : 'badge-primary'} badge-sm`}>
+                        {blog.type || 'Post'}
+                      </span>
+                    </td>
                     <td className="text-base-content/70">{blog.author}</td>
                     <td className="text-right whitespace-nowrap">
                       <button 
@@ -143,12 +151,42 @@ export default function BlogsManager() {
       </div>
 
       {isModalOpen && (
-        <div className="modal modal-open bg-black/40 backdrop-blur-sm">
-          <div className="modal-box max-w-3xl bg-base-100 rounded-2xl shadow-2xl border border-base-200">
-            <h3 className="font-bold text-2xl mb-6 text-base-content border-b border-base-200 pb-4">
-              {editingId ? 'Edit Blog' : 'Write New Blog'}
-            </h3>
-            <form onSubmit={handleSubmit} className="space-y-5">
+        <div className="modal modal-open bg-black/40 backdrop-blur-sm z-50">
+          <div className="modal-box max-w-3xl bg-base-100 rounded-2xl shadow-2xl border border-base-200 p-0">
+            <div className="p-6 border-b border-base-200">
+              <h3 className="font-bold text-2xl text-base-content">
+                {editingId ? 'Edit Blog' : 'Write New Blog'}
+              </h3>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="p-6 space-y-6">
+              
+              <div className="flex flex-col space-y-3">
+                <label className="text-sm font-semibold text-base-content/90">Blog Type *</label>
+                <div className="flex gap-4">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input 
+                      type="radio" 
+                      name="type" 
+                      className="radio radio-primary" 
+                      checked={formData.type === 'Post'} 
+                      onChange={() => setFormData({...formData, type: 'Post'})} 
+                    />
+                    <span className="font-medium">Post</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input 
+                      type="radio" 
+                      name="type" 
+                      className="radio radio-secondary" 
+                      checked={formData.type === 'Article'} 
+                      onChange={() => setFormData({...formData, type: 'Article'})} 
+                    />
+                    <span className="font-medium">Article</span>
+                  </label>
+                </div>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col space-y-2">
                   <label className="text-sm font-semibold text-base-content/90">Blog Title *</label>

@@ -28,6 +28,11 @@ Blog.init({
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
+    type: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        defaultValue: 'Post',
+    },
     showContactBtn: {
         type: sequelize_1.DataTypes.BOOLEAN,
         allowNull: false,
