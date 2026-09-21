@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useGetReviewsQuery } from '@/store/api/apiSlice';
 import { Star, Quote } from 'lucide-react';
 import FadeIn from '@/components/animations/FadeIn';
@@ -36,35 +37,57 @@ export default function ReviewsSection() {
       <StaggerContainer staggerDelay={0.15} className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8 relative z-10">
         {reviews.map((review: any, i: number) => (
           <StaggerItem key={review.id} className="break-inside-avoid">
-            <div className="bg-base-100/60 backdrop-blur-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 rounded-[2.5rem] p-8 sm:p-10 border border-base-200/60 relative group">
-              <div className="absolute top-6 right-6 text-primary/5 group-hover:text-primary/10 transition-colors duration-500">
-                <Quote className="h-24 w-24 transform rotate-180" />
-              </div>
-              <div className="relative z-10 w-full overflow-hidden">
-                <div className="flex gap-1 text-warning mb-6">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className={`h-5 w-5 ${i < review.rating ? 'fill-current' : 'opacity-30 text-base-content'}`} />
-                  ))}
-                </div>
-                <p className="text-base-content/80 text-lg leading-relaxed font-medium italic mb-8 break-words break-all">
-                  "{review.comment}"
-                </p>
-                <div className="flex items-center gap-4 mt-auto border-t border-base-300/50 pt-6">
-                  <div className="avatar placeholder shadow-sm shrink-0">
-                    <div className="bg-gradient-to-br from-primary to-accent text-white rounded-full w-14 border-2 border-base-100">
-                      <span className="text-xl font-black">{review.patientName.charAt(0)}</span>
-                    </div>
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h4 className="font-bold text-base-content text-lg truncate" title={review.patientName}>{review.patientName}</h4>
-                    <p className="text-sm font-medium text-primary">Verified Patient</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ReviewCard review={review} />
           </StaggerItem>
         ))}
       </StaggerContainer>
     </section>
+  );
+}
+
+function ReviewCard({ review }: { review: any }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const isLong = review.comment && review.comment.length > 120;
+
+  return (
+    <div className="bg-base-100/60 backdrop-blur-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 rounded-[2.5rem] p-8 sm:p-10 border border-base-200/60 relative group">
+      <div className="absolute top-6 right-6 text-primary/5 group-hover:text-primary/10 transition-colors duration-500">
+        <Quote className="h-24 w-24 transform rotate-180" />
+      </div>
+      <div className="relative z-10 w-full overflow-hidden flex flex-col h-full">
+        <div className="flex gap-1 text-warning mb-6">
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} className={`h-5 w-5 ${i < review.rating ? 'fill-current' : 'opacity-30 text-base-content'}`} />
+          ))}
+        </div>
+        
+        <p className={`text-base-content/80 text-lg leading-relaxed font-medium italic mb-2 break-words break-all ${!isExpanded ? 'line-clamp-4' : ''}`}>
+          "{review.comment}"
+        </p>
+        
+        {isLong && (
+          <button 
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="text-primary text-sm font-bold hover:text-secondary self-start mb-6 transition-colors"
+          >
+            {isExpanded ? 'Show Less' : 'Read More...'}
+          </button>
+        )}
+        
+        {!isLong && <div className="mb-6"></div>}
+
+        <div className="flex items-center gap-4 mt-auto border-t border-base-300/50 pt-6">
+          <div className="avatar placeholder shadow-sm shrink-0">
+            <div className="bg-gradient-to-br from-primary to-accent text-white rounded-full w-14 border-2 border-base-100">
+              <span className="text-xl font-black">{review.patientName.charAt(0)}</span>
+            </div>
+          </div>
+          <div className="min-w-0 flex-1">
+            <h4 className="font-bold text-base-content text-lg truncate" title={review.patientName}>{review.patientName}</h4>
+            <p className="text-sm font-medium text-primary">Verified Patient</p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
