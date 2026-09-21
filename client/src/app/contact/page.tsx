@@ -21,13 +21,13 @@ export default function Contact() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-10 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 pb-8">
           
           {/* Contact Information */}
           <FadeIn delay={0.1} direction="right" className="lg:col-span-5 space-y-6">
-            <div className="bg-base-100/80 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-10 shadow-2xl shadow-base-300/50 border border-base-200/50 h-full flex flex-col justify-between relative overflow-hidden group">
-              <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors duration-700"></div>
+            <div className="bg-base-100/95 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-10 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_60px_-10px_rgba(var(--color-primary),0.2)] border border-base-200 h-full flex flex-col justify-between relative overflow-hidden group transition-all duration-500">
+              <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-colors duration-700"></div>
               
               <div className="relative z-10">
                 <h2 className="text-3xl font-black mb-8 text-base-content">Contact Info</h2>
@@ -79,8 +79,8 @@ export default function Contact() {
 
           {/* Contact Form */}
           <FadeIn delay={0.2} direction="left" className="lg:col-span-7">
-            <div className="relative bg-base-100/80 backdrop-blur-xl p-8 md:p-12 rounded-[2.5rem] border border-base-200/50 shadow-2xl shadow-base-300/50 overflow-hidden group">
-              <div className="absolute -top-24 -right-24 w-64 h-64 bg-secondary/5 rounded-full blur-3xl group-hover:bg-secondary/10 transition-colors duration-700"></div>
+            <div className="relative bg-base-100/95 backdrop-blur-xl p-8 md:p-12 rounded-[2.5rem] border border-base-200 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_60px_-10px_rgba(var(--color-secondary),0.2)] overflow-hidden group transition-all duration-500">
+              <div className="absolute -top-24 -right-24 w-64 h-64 bg-secondary/10 rounded-full blur-3xl group-hover:bg-secondary/20 transition-colors duration-700"></div>
               
               <div className="relative z-10">
                 <h2 className="text-3xl font-black mb-8 text-base-content">Send a Message</h2>
