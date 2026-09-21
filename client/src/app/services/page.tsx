@@ -23,7 +23,7 @@ export default function Services() {
   return (
     <div className="pb-24">
       {/* Banner */}
-      <div className="relative h-[400px] flex items-center justify-center overflow-hidden">
+      <div className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <Image 
           src="/images/services.jpg" 
           alt="Advanced Medical Services" 
@@ -32,19 +32,23 @@ export default function Services() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-neutral/70 backdrop-blur-sm"></div>
-        <div className="relative z-10 text-center text-white px-4 animate-in slide-in-from-bottom duration-700">
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-6">Medical Specialties</h1>
-          <p className="text-xl max-w-2xl mx-auto text-neutral-content/90">
+        <div className="absolute inset-0 bg-gradient-to-t from-base-100 via-base-100/80 to-black/60 backdrop-blur-sm"></div>
+        <div className="relative z-10 text-center text-base-content px-4 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-base-200/50 backdrop-blur-md border border-base-300 shadow-sm mb-6">
+            <span className="text-xs font-bold uppercase tracking-wider text-primary">Specialties</span>
+          </div>
+          <h1 className="text-5xl md:text-7xl font-black mb-6 drop-shadow-md">Medical <span className="text-primary">Departments</span></h1>
+          <p className="text-xl max-w-2xl mx-auto text-base-content/80 font-medium">
             Delivering world-class healthcare through modern technology and specialized expertise.
           </p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-extrabold text-base-content mb-4">Explore Our Departments</h2>
-          <p className="text-xl text-base-content/70 max-w-3xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 relative">
+        <div className="absolute top-1/2 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 -z-10"></div>
+        <div className="text-center mb-20">
+          <h2 className="text-4xl lg:text-5xl font-black text-base-content mb-6 leading-tight">Explore Our Departments</h2>
+          <p className="text-xl text-base-content/70 max-w-3xl mx-auto font-medium">
             We provide a wide array of treatments to cover all your health needs. Browse our live catalog of specialized medical services below.
           </p>
         </div>
@@ -54,12 +58,12 @@ export default function Services() {
             <span className="loading loading-spinner loading-lg text-primary"></span>
           </div>
         ) : !services || services.length === 0 ? (
-          <div className="text-center py-20 bg-base-200 rounded-[2rem] border border-base-300">
-            <h3 className="text-2xl font-bold text-base-content/70">No Services Available</h3>
-            <p className="text-base-content/50 mt-2">Check back later or contact us directly.</p>
+          <div className="text-center py-20 bg-base-200 rounded-[3rem] border border-base-300 shadow-inner">
+            <h3 className="text-3xl font-bold text-base-content mb-4">No Services Available</h3>
+            <p className="text-base-content/50 text-lg">Check back later or contact us directly.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 relative z-10">
             {services.map((service: any, index: number) => {
               const IconComponent = iconMap[service.icon] || Activity;
               return (
@@ -68,30 +72,31 @@ export default function Services() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   key={service.id} 
-                  className="card glass-card group rounded-3xl overflow-hidden"
+                  className="group relative rounded-[2.5rem] overflow-hidden bg-base-100/50 backdrop-blur-md border border-base-200 shadow-lg hover:shadow-2xl hover:border-primary/30 transition-all duration-500 cursor-pointer flex flex-col h-full"
                 >
-                  <div className="card-body p-8">
-                    <div className="bg-gradient-to-br from-primary/20 to-secondary/20 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-500 shadow-sm">
-                      <IconComponent className="h-8 w-8 text-primary group-hover:text-primary-content transition-colors" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                  <div className="card-body p-8 sm:p-10 relative z-10 flex-grow flex flex-col">
+                    <div className="bg-gradient-to-br from-base-200 to-base-300 w-20 h-20 rounded-[1.5rem] flex items-center justify-center mb-8 group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-secondary group-hover:scale-110 group-hover:-rotate-3 transition-all duration-500 shadow-inner">
+                      <IconComponent className="h-10 w-10 text-primary group-hover:text-white transition-colors duration-500" />
                     </div>
-                    <h3 className="card-title text-2xl mb-2 text-base-content">{service.title}</h3>
-                    <p className="text-base-content/70 text-lg mb-4">{service.description}</p>
+                    <h3 className="card-title text-3xl font-bold mb-4 text-base-content">{service.title}</h3>
+                    <p className="text-base-content/70 text-lg mb-8 leading-relaxed flex-grow">{service.description}</p>
                     
                     {service.details && (
-                      <div className="mt-2 pt-4 border-t border-base-200 hidden group-hover:block animate-in fade-in slide-in-from-top-4 duration-300">
-                         <p className="text-sm text-base-content/60 leading-relaxed">{service.details}</p>
+                      <div className="mb-6 h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-500 overflow-hidden">
+                         <p className="text-sm text-base-content/60 leading-relaxed font-medium bg-base-200/50 p-4 rounded-2xl">{service.details}</p>
                       </div>
                     )}
                     
-                    <div className="card-actions justify-end mt-4 gap-2 flex-wrap">
+                    <div className="mt-auto pt-6 border-t border-base-200/50 flex justify-between items-center">
+                      <button className="text-primary font-bold hover:text-secondary transition-colors inline-flex items-center group/link">
+                        Read More <ArrowRight className="h-5 w-5 ml-2 group-hover/link:translate-x-2 transition-transform duration-300" />
+                      </button>
                       {service.showContactBtn !== false && (
-                        <Link href="/contact" className="btn btn-primary btn-sm rounded-full px-6 shadow-md shadow-primary/20">
-                          Contact Us
+                        <Link href="/contact" className="btn btn-primary btn-sm rounded-full shadow-md shadow-primary/20 hover:scale-105 transition-transform duration-300">
+                          Book
                         </Link>
                       )}
-                      <button className="btn btn-outline btn-secondary btn-sm rounded-full px-6 modern-border">
-                        Read More
-                      </button>
                     </div>
                   </div>
                 </motion.div>
@@ -102,18 +107,24 @@ export default function Services() {
       </div>
 
       {/* New Section: How It Works */}
-      <section className="bg-base-200 mt-24 py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-extrabold text-base-content mb-4">Your Healthcare Journey</h2>
-            <p className="text-xl text-base-content/70 max-w-2xl mx-auto">
+      <section className="bg-base-200 mt-32 py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-base-100 border border-base-300 shadow-sm mb-6">
+              <span className="text-xs font-bold uppercase tracking-wider text-primary">Process</span>
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-black text-base-content mb-6 leading-tight">Your Healthcare Journey</h2>
+            <p className="text-xl text-base-content/70 max-w-2xl mx-auto font-medium">
               We've streamlined our patient intake and care process so you can focus entirely on your recovery.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="text-center space-y-4">
-              <div className="mx-auto bg-primary/20 w-24 h-24 rounded-full flex items-center justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+            <div className="hidden md:block absolute top-12 left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-primary via-secondary to-accent opacity-30"></div>
+            
+            <div className="text-center space-y-6 relative z-10">
+              <div className="mx-auto bg-base-100 w-24 h-24 rounded-[2rem] flex items-center justify-center shadow-xl shadow-base-300/50 border border-base-200 hover:scale-110 transition-transform duration-500">
                 <PhoneCall className="h-10 w-10 text-primary" />
               </div>
               <h3 className="text-2xl font-bold text-base-content">1. Book an Appointment</h3>
@@ -122,10 +133,9 @@ export default function Services() {
               </p>
             </div>
             
-            <div className="text-center space-y-4 relative">
-              <div className="hidden md:block absolute top-12 -left-[20%] w-[40%] h-[2px] bg-primary/30 border-dashed border-2"></div>
-              <div className="mx-auto bg-primary/20 w-24 h-24 rounded-full flex items-center justify-center">
-                <ClipboardCheck className="h-10 w-10 text-primary" />
+            <div className="text-center space-y-6 relative z-10">
+              <div className="mx-auto bg-base-100 w-24 h-24 rounded-[2rem] flex items-center justify-center shadow-xl shadow-base-300/50 border border-base-200 hover:scale-110 transition-transform duration-500">
+                <ClipboardCheck className="h-10 w-10 text-secondary" />
               </div>
               <h3 className="text-2xl font-bold text-base-content">2. Diagnosis & Consultation</h3>
               <p className="text-base-content/70 text-lg leading-relaxed">
@@ -133,10 +143,9 @@ export default function Services() {
               </p>
             </div>
 
-            <div className="text-center space-y-4 relative">
-              <div className="hidden md:block absolute top-12 -left-[20%] w-[40%] h-[2px] bg-primary/30 border-dashed border-2"></div>
-              <div className="mx-auto bg-primary/20 w-24 h-24 rounded-full flex items-center justify-center">
-                <HeartHandshake className="h-10 w-10 text-primary" />
+            <div className="text-center space-y-6 relative z-10">
+              <div className="mx-auto bg-base-100 w-24 h-24 rounded-[2rem] flex items-center justify-center shadow-xl shadow-base-300/50 border border-base-200 hover:scale-110 transition-transform duration-500">
+                <HeartHandshake className="h-10 w-10 text-accent" />
               </div>
               <h3 className="text-2xl font-bold text-base-content">3. Treatment & Recovery</h3>
               <p className="text-base-content/70 text-lg leading-relaxed">

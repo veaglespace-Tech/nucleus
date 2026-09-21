@@ -33,13 +33,13 @@ export default function SingleBlogPage({ params }: { params: Promise<{ id: strin
   return (
     <article className="min-h-screen bg-base-100 pb-24">
       {/* Hero Section */}
-      <div className="relative w-full h-[40vh] md:h-[60vh] bg-base-300">
+      <div className="relative w-full h-[50vh] md:h-[70vh] bg-base-300 overflow-hidden">
         {blog.image ? (
           <Image 
             src={blog.image} 
             alt={blog.title} 
             fill 
-            className="object-cover"
+            className="object-cover scale-105 animate-in fade-in zoom-in duration-1000"
             priority
           />
         ) : (
@@ -47,58 +47,58 @@ export default function SingleBlogPage({ params }: { params: Promise<{ id: strin
             <span className="text-primary/40 text-2xl font-bold">No Cover Image</span>
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-base-100 via-base-100/50 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-base-100 via-base-100/60 to-black/30"></div>
         
         {/* Back Button */}
-        <Link href="/" className="absolute top-8 left-4 md:left-8 btn btn-circle btn-ghost bg-base-100/50 backdrop-blur-md hover:bg-base-100 shadow-sm z-10">
+        <Link href="/" className="absolute top-8 left-4 md:left-8 btn btn-circle btn-ghost bg-base-100/30 backdrop-blur-md hover:bg-base-100 shadow-sm z-10 text-white hover:text-base-content transition-colors">
           <ArrowLeft className="h-5 w-5" />
         </Link>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32 relative z-10">
-        <FadeIn delay={0.1} direction="up" className="bg-base-100 rounded-3xl p-8 md:p-12 shadow-2xl shadow-base-300/50 border border-base-200">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-40 relative z-10">
+        <FadeIn delay={0.1} direction="up" className="bg-base-100/80 backdrop-blur-xl rounded-[3rem] p-8 md:p-16 shadow-2xl shadow-base-300/50 border border-base-200/50">
           {/* Metadata */}
-          <div className="flex flex-wrap items-center gap-4 text-sm font-medium text-base-content/70 mb-6">
-            <span className={`badge ${blog.type === 'Article' ? 'badge-secondary' : 'badge-primary'} badge-lg rounded-full`}>
+          <div className="flex flex-wrap items-center gap-4 text-sm font-bold text-base-content/70 mb-8">
+            <span className={`px-4 py-1.5 rounded-full text-white ${blog.type === 'Article' ? 'bg-secondary' : 'bg-primary'} shadow-md`}>
               {blog.type || 'Post'}
             </span>
-            <div className="flex items-center gap-1.5">
-              <Calendar className="h-4 w-4" />
+            <div className="flex items-center gap-2 bg-base-200 px-4 py-1.5 rounded-full">
+              <Calendar className="h-4 w-4 text-primary" />
               {new Date(blog.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
             </div>
-            <div className="flex items-center gap-1.5">
-              <User className="h-4 w-4" />
+            <div className="flex items-center gap-2 bg-base-200 px-4 py-1.5 rounded-full">
+              <User className="h-4 w-4 text-primary" />
               {blog.author}
             </div>
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-base-content mb-8 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-base-content mb-10 leading-tight">
             {blog.title}
           </h1>
 
           {/* Content */}
-          <div className="prose prose-lg md:prose-xl prose-base-content max-w-none prose-headings:text-base-content prose-a:text-primary">
+          <div className="prose prose-lg md:prose-xl prose-base-content max-w-none prose-headings:text-base-content prose-headings:font-bold prose-a:text-primary prose-p:leading-relaxed">
             {blog.content.split('\n').map((paragraph: string, idx: number) => (
-              paragraph.trim() ? <p key={idx} className="mb-6 leading-relaxed">{paragraph}</p> : <br key={idx} />
+              paragraph.trim() ? <p key={idx} className="mb-6">{paragraph}</p> : <br key={idx} />
             ))}
           </div>
 
-          <div className="divider my-12"></div>
+          <div className="divider my-12 opacity-50"></div>
 
           {/* Footer Actions */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="flex gap-4">
-              <button className="btn btn-outline btn-sm rounded-full">
-                <Share2 className="h-4 w-4 mr-2" /> Share
+              <button className="btn btn-outline border-base-300 btn-md rounded-full hover:bg-base-200 hover:text-base-content shadow-sm">
+                <Share2 className="h-4 w-4 mr-2" /> Share Article
               </button>
             </div>
             
             {blog.showContactBtn !== false && (
-              <div className="bg-primary/5 p-6 rounded-2xl w-full sm:w-auto flex flex-col items-center sm:items-end text-center sm:text-right border border-primary/10">
-                <h3 className="font-bold text-lg mb-2">Need medical advice?</h3>
-                <p className="text-sm text-base-content/70 mb-4">Our specialists are here to help you.</p>
-                <Link href="/contact" className="btn btn-primary rounded-full shadow-lg shadow-primary/30 w-full sm:w-auto">
+              <div className="bg-gradient-to-r from-primary/5 to-secondary/5 p-6 rounded-3xl w-full sm:w-auto flex flex-col items-center sm:items-end text-center sm:text-right border border-primary/10 shadow-inner">
+                <h3 className="font-black text-xl mb-2 text-base-content">Need medical advice?</h3>
+                <p className="text-base font-medium text-base-content/70 mb-4">Our specialists are here to help you.</p>
+                <Link href="/contact" className="btn btn-primary rounded-full shadow-lg shadow-primary/30 w-full sm:w-auto px-8 hover:scale-105 transition-transform">
                   Book an Appointment
                 </Link>
               </div>

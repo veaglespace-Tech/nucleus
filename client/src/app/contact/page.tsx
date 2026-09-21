@@ -1,43 +1,145 @@
+import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
+import FadeIn from "@/components/animations/FadeIn";
+
 export default function Contact() {
   return (
-    <div className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center">Contact Us</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12">
-        <div className="relative bg-gradient-to-br from-primary/10 via-base-100 to-accent/5 text-base-content p-10 rounded-[2rem] border border-primary/20 shadow-2xl shadow-primary/10 hover:shadow-primary/20 transition-all duration-500 overflow-hidden group">
-          {/* Decorative blur */}
-          <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/20 rounded-full blur-3xl group-hover:bg-primary/30 transition-colors duration-500"></div>
+    <div className="pb-24">
+      {/* Banner */}
+      <div className="relative h-[40vh] min-h-[400px] bg-base-300 flex flex-col items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 backdrop-blur-3xl z-0"></div>
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+        <div className="relative z-10 text-center space-y-4 px-4 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-base-100/50 backdrop-blur-md border border-base-200 shadow-sm mb-4">
+            <span className="text-xs font-bold uppercase tracking-wider text-primary">Get In Touch</span>
+          </div>
+          <h1 className="text-5xl md:text-7xl font-black text-base-content leading-tight drop-shadow-sm">
+            Contact <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Us</span>
+          </h1>
+          <p className="text-xl text-base-content/70 max-w-2xl mx-auto font-medium">
+            We are here to assist you. Reach out for appointments, inquiries, or emergency support.
+          </p>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
-          <h2 className="text-3xl font-bold mb-6 text-base-content relative z-10">Send us a message</h2>
-          <form className="space-y-4 relative z-10">
-            <div className="form-control">
-              <label className="label"><span className="label-text font-medium text-base-content/80">Name</span></label>
-              <input type="text" className="input bg-base-100 border-base-200 shadow-sm text-base-content placeholder-base-content/40 w-full focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Your full name" />
+          {/* Contact Information */}
+          <FadeIn delay={0.1} direction="right" className="lg:col-span-5 space-y-6">
+            <div className="bg-base-100/80 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-10 shadow-2xl shadow-base-300/50 border border-base-200/50 h-full flex flex-col justify-between relative overflow-hidden group">
+              <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors duration-700"></div>
+              
+              <div className="relative z-10">
+                <h2 className="text-3xl font-black mb-8 text-base-content">Contact Info</h2>
+                
+                <div className="space-y-8">
+                  <div className="flex items-start gap-6 group/item cursor-pointer">
+                    <div className="bg-primary/10 w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 group-hover/item:bg-primary group-hover/item:text-white transition-colors duration-300 shadow-sm border border-primary/10">
+                      <MapPin className="h-6 w-6 text-primary group-hover/item:text-white transition-colors" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold mb-1 text-base-content">Our Location</h3>
+                      <p className="text-base-content/70 leading-relaxed font-medium">123 Health Avenue, Medical District,<br/>City, State - 400001</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-6 group/item cursor-pointer">
+                    <div className="bg-secondary/10 w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 group-hover/item:bg-secondary group-hover/item:text-white transition-colors duration-300 shadow-sm border border-secondary/10">
+                      <Phone className="h-6 w-6 text-secondary group-hover/item:text-white transition-colors" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold mb-1 text-base-content">Phone</h3>
+                      <p className="text-base-content/70 leading-relaxed font-medium">+91 98765 43210<br/>+91 98765 43211</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-6 group/item cursor-pointer">
+                    <div className="bg-accent/10 w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 group-hover/item:bg-accent group-hover/item:text-white transition-colors duration-300 shadow-sm border border-accent/10">
+                      <Mail className="h-6 w-6 text-accent group-hover/item:text-white transition-colors" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold mb-1 text-base-content">Email</h3>
+                      <p className="text-base-content/70 leading-relaxed font-medium">info@nucleus-hospital.com<br/>support@nucleus-hospital.com</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-6 group/item cursor-pointer">
+                    <div className="bg-success/10 w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 group-hover/item:bg-success group-hover/item:text-white transition-colors duration-300 shadow-sm border border-success/10">
+                      <Clock className="h-6 w-6 text-success group-hover/item:text-white transition-colors" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold mb-1 text-base-content">Working Hours</h3>
+                      <p className="text-base-content/70 leading-relaxed font-medium">Emergency: 24/7<br/>OPD: Mon - Sat, 9:00 AM - 8:00 PM</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="form-control">
-              <label className="label"><span className="label-text font-medium text-base-content/80">Email</span></label>
-              <input type="email" className="input bg-base-100 border-base-200 shadow-sm text-base-content placeholder-base-content/40 w-full focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Your email address" />
+          </FadeIn>
+
+          {/* Contact Form */}
+          <FadeIn delay={0.2} direction="left" className="lg:col-span-7">
+            <div className="relative bg-base-100/80 backdrop-blur-xl p-8 md:p-12 rounded-[2.5rem] border border-base-200/50 shadow-2xl shadow-base-300/50 overflow-hidden group">
+              <div className="absolute -top-24 -right-24 w-64 h-64 bg-secondary/5 rounded-full blur-3xl group-hover:bg-secondary/10 transition-colors duration-700"></div>
+              
+              <div className="relative z-10">
+                <h2 className="text-3xl font-black mb-8 text-base-content">Send a Message</h2>
+                <form className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="form-control">
+                      <label className="label pt-0"><span className="label-text font-bold text-base-content/80">First Name</span></label>
+                      <input type="text" className="input input-lg bg-base-200 border-base-300 text-base-content placeholder-base-content/40 w-full focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all rounded-2xl" placeholder="John" />
+                    </div>
+                    <div className="form-control">
+                      <label className="label pt-0"><span className="label-text font-bold text-base-content/80">Last Name</span></label>
+                      <input type="text" className="input input-lg bg-base-200 border-base-300 text-base-content placeholder-base-content/40 w-full focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all rounded-2xl" placeholder="Doe" />
+                    </div>
+                  </div>
+                  
+                  <div className="form-control">
+                    <label className="label"><span className="label-text font-bold text-base-content/80">Email Address</span></label>
+                    <input type="email" className="input input-lg bg-base-200 border-base-300 text-base-content placeholder-base-content/40 w-full focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all rounded-2xl" placeholder="john@example.com" />
+                  </div>
+                  
+                  <div className="form-control">
+                    <label className="label"><span className="label-text font-bold text-base-content/80">Subject</span></label>
+                    <input type="text" className="input input-lg bg-base-200 border-base-300 text-base-content placeholder-base-content/40 w-full focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all rounded-2xl" placeholder="How can we help?" />
+                  </div>
+                  
+                  <div className="form-control">
+                    <label className="label"><span className="label-text font-bold text-base-content/80">Message</span></label>
+                    <textarea className="textarea textarea-lg bg-base-200 border-base-300 text-base-content placeholder-base-content/40 h-40 w-full focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all rounded-3xl resize-none" placeholder="Type your message here..."></textarea>
+                  </div>
+                  
+                  <button type="button" className="btn btn-primary btn-lg rounded-full w-full shadow-lg shadow-primary/30 hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 text-white font-bold group/btn">
+                    Send Message <Send className="h-5 w-5 ml-2 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+                  </button>
+                </form>
+              </div>
             </div>
-            <div className="form-control">
-              <label className="label"><span className="label-text font-medium text-base-content/80">Message</span></label>
-              <textarea className="textarea bg-base-100 border-base-200 shadow-sm text-base-content placeholder-base-content/40 h-32 w-full focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" placeholder="How can we help you?"></textarea>
-            </div>
-            <button type="button" className="btn bg-gradient-to-r from-primary to-accent hover:from-primary hover:to-secondary w-full border-none shadow-lg shadow-primary/30 mt-4 text-white hover:-translate-y-1 transition-all duration-300">Send Message</button>
-          </form>
+          </FadeIn>
+          
         </div>
-        <div className="flex flex-col justify-center space-y-8 p-8">
-          <div>
-            <h3 className="text-xl font-bold mb-2">Address</h3>
-            <p className="text-base-content/70">123 Health Avenue, Medical District, City - 400001</p>
-          </div>
-          <div>
-            <h3 className="text-xl font-bold mb-2">Phone</h3>
-            <p className="text-base-content/70">+91 98765 43210</p>
-          </div>
-          <div>
-            <h3 className="text-xl font-bold mb-2">Email</h3>
-            <p className="text-base-content/70">info@cityhospital.com</p>
-          </div>
-        </div>
+      </div>
+      
+      {/* Map Placeholder */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+         <div className="w-full h-[400px] bg-base-300 rounded-[2.5rem] overflow-hidden relative shadow-inner border border-base-200">
+           {/* Simulate a map with a gradient and pattern */}
+           <div className="absolute inset-0 bg-gradient-to-br from-base-200 to-base-300"></div>
+           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/az-subtle.png')] opacity-30"></div>
+           <div className="absolute inset-0 flex items-center justify-center">
+             <div className="bg-base-100/90 backdrop-blur-md px-6 py-4 rounded-2xl shadow-xl flex items-center gap-4 hover:-translate-y-1 transition-transform cursor-pointer border border-base-200">
+                <div className="bg-primary/20 p-3 rounded-full animate-pulse">
+                  <MapPin className="h-8 w-8 text-primary" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-lg">Nucleus Hospital</h4>
+                  <p className="text-base-content/70 text-sm font-medium">Click to open in Google Maps</p>
+                </div>
+             </div>
+           </div>
+         </div>
       </div>
     </div>
   );

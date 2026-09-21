@@ -47,20 +47,22 @@ export default function DynamicServicesHome() {
           {services.slice(0, 3).map((service: any) => {
             const IconComponent = iconMap[service.icon] || Activity;
             return (
-              <StaggerItem key={service.id} className="card glass-card group cursor-pointer rounded-[2rem]">
-                <div className="card-body p-8">
-                  <div className="bg-gradient-to-br from-primary/20 to-secondary/20 w-20 h-20 rounded-[1.5rem] flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-500 shadow-inner">
-                    <IconComponent className="h-10 w-10 text-primary group-hover:text-primary-content transition-colors duration-500" />
+              <StaggerItem key={service.id} className="card bg-base-100/50 backdrop-blur-md border border-base-200 shadow-lg hover:shadow-2xl hover:border-primary/30 transition-all duration-500 group cursor-pointer rounded-[2.5rem] overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                <div className="card-body p-8 sm:p-10 relative z-10">
+                  <div className="bg-gradient-to-br from-base-200 to-base-300 w-24 h-24 rounded-[2rem] flex items-center justify-center mb-8 group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-secondary group-hover:scale-110 group-hover:-rotate-3 transition-all duration-500 shadow-inner">
+                    <IconComponent className="h-12 w-12 text-primary group-hover:text-white transition-colors duration-500" />
                   </div>
-                  <h3 className="card-title text-2xl mb-3">{service.title}</h3>
-                  <p className="text-base-content/70 leading-relaxed text-lg line-clamp-3">{service.description}</p>
-                  <div className="card-actions justify-between items-center mt-6">
-                    <Link href={`/services`} className="btn btn-ghost text-primary hover:bg-primary/10 rounded-full px-6 transition-colors">
-                      Learn more <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                  <h3 className="card-title text-3xl mb-4 font-bold">{service.title}</h3>
+                  <p className="text-base-content/70 leading-relaxed text-lg mb-8 line-clamp-3">{service.description}</p>
+                  
+                  <div className="mt-auto pt-6 border-t border-base-200/50 flex justify-between items-center">
+                    <Link href={`/services`} className="text-primary font-bold hover:text-secondary transition-colors inline-flex items-center group/link">
+                      Learn more <ArrowRight className="h-5 w-5 ml-2 group-hover/link:translate-x-2 transition-transform duration-300" />
                     </Link>
                     {service.showContactBtn !== false && (
-                       <Link href="/contact" className="btn btn-primary btn-sm rounded-full shadow-md shadow-primary/20">
-                         Contact Us
+                       <Link href="/contact" className="btn btn-primary btn-sm rounded-full shadow-md shadow-primary/20 hover:scale-105 transition-transform duration-300">
+                         Book
                        </Link>
                     )}
                   </div>
