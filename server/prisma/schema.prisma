@@ -8,11 +8,13 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  username String @unique
+  id       Int      @id @default(autoincrement())
+  username String   @unique
   password String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("users")
 }
 
 model Blog {
@@ -24,6 +26,8 @@ model Blog {
   showContactBtn Boolean  @default(true)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+
+  @@map("blogs")
 }
 
 model Review {
@@ -33,6 +37,8 @@ model Review {
   comment     String   @db.Text
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@map("reviews")
 }
 
 model Service {
@@ -44,4 +50,6 @@ model Service {
   showContactBtn Boolean  @default(true)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+
+  @@map("services")
 }
