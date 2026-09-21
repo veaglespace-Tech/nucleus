@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Activity, LayoutDashboard, FileText, Star, LogOut, Settings, HeartPulse } from 'lucide-react';
+import { Activity, LayoutDashboard, FileText, Star, LogOut, Settings, HeartPulse, Home } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '@/store/slices/authSlice';
 import { RootState } from '@/store';
@@ -72,7 +72,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </nav>
         </div>
         
-        <div className="p-4 border-t border-base-200">
+        <div className="p-4 border-t border-base-200 flex flex-col gap-2">
+          <Link
+            href="/"
+            className="flex items-center w-full px-4 py-3 text-base-content hover:bg-base-200 rounded-xl transition-colors font-medium"
+          >
+            <Home className="h-5 w-5 mr-3" />
+            Back to Website
+          </Link>
           <button
             onClick={handleLogout}
             className="flex items-center w-full px-4 py-3 text-error hover:bg-error/10 rounded-xl transition-colors font-medium"

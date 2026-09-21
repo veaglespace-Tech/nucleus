@@ -38,6 +38,9 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+            <Link href="/admin" className="text-lg font-medium transition-colors text-base-content/80 hover:text-primary">
+              Admin
+            </Link>
             <Link href="/contact" className="btn btn-primary rounded-full px-6">Book Appointment</Link>
           </div>
           <div className="flex items-center md:hidden">
@@ -65,6 +68,13 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+            <Link
+              href="/admin"
+              className="block px-3 py-2 rounded-md text-base font-medium hover:bg-base-200"
+              onClick={() => setIsOpen(false)}
+            >
+              Admin
+            </Link>
             <Link href="/contact" className="block px-3 py-2 btn btn-primary w-full mt-4">Book Appointment</Link>
           </div>
         </div>
