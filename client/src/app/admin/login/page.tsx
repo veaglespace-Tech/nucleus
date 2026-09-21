@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '@/store/api/apiSlice';
 import { loginSuccess } from '@/store/slices/authSlice';
-import { HeartPulse, RefreshCw } from 'lucide-react';
+import { HeartPulse, RefreshCw, Lock, Mail, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
 export default function AdminLogin() {
   const [username, setUsername] = useState('');
@@ -67,91 +68,138 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-200 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-base-100 p-8 rounded-3xl shadow-xl">
-        <div className="text-center">
-          <HeartPulse className="mx-auto h-12 w-12 text-primary" />
-          <h2 className="mt-6 text-3xl font-extrabold text-base-content">
-            Admin Dashboard
-          </h2>
-          <p className="mt-2 text-sm text-base-content/70">
-            Sign in to manage the hospital website
-          </p>
-        </div>
+    <div className="min-h-screen bg-base-200/50 pt-32 pb-16 px-4 sm:px-6 lg:px-8 flex items-center justify-center relative overflow-hidden">
+      {/* Abstract Background Orbs */}
+      <div className="absolute top-0 left-0 w-[50rem] h-[50rem] bg-primary/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 -z-10 pointer-events-none"></div>
+      <div className="absolute bottom-0 right-0 w-[50rem] h-[50rem] bg-secondary/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3 -z-10 pointer-events-none"></div>
+
+      <div className="max-w-6xl w-full bg-base-100 rounded-[3rem] shadow-2xl shadow-primary/5 flex overflow-hidden border border-base-300/50 relative z-10">
         
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          {error && (
-            <div className="alert alert-error text-sm rounded-xl">
-              Invalid username or password
+        {/* Left Side: Form */}
+        <div className="w-full lg:w-5/12 p-10 sm:p-14 lg:p-16 flex flex-col justify-center">
+          <div className="mb-10">
+            <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-2xl mb-6">
+              <HeartPulse className="h-8 w-8 text-primary" />
             </div>
-          )}
-          {validationError && (
-            <div className="alert alert-warning text-sm rounded-xl">
-              {validationError}
-            </div>
-          )}
+            <h2 className="text-4xl font-black text-base-content tracking-tight mb-2">
+              Welcome Back
+            </h2>
+            <p className="text-base-content/60 font-medium">
+              Sign in to manage the hospital ecosystem.
+            </p>
+          </div>
           
-          <div className="rounded-md shadow-sm space-y-4">
-            <div className="form-control">
-              <label className="label"><span className="label-text font-medium">Username</span></label>
-              <input
-                name="username"
-                type="text"
-                required
-                className="input input-bordered w-full focus:input-primary"
-                placeholder="Enter username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </div>
-            <div className="form-control">
-              <label className="label"><span className="label-text font-medium">Password</span></label>
-              <input
-                name="password"
-                type="password"
-                required
-                className="input input-bordered w-full focus:input-primary"
-                placeholder="Enter password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-
-            {/* Captcha Section */}
-            <div className="form-control mt-4 p-4 border border-base-200 rounded-xl bg-base-50">
-              <label className="label pt-0"><span className="label-text font-medium">Security Check (Captcha)</span></label>
-              <div className="flex items-center gap-4">
-                <div className="bg-base-200 px-4 py-2 rounded-lg font-bold text-lg tracking-wider flex items-center gap-2 select-none border border-base-300">
-                  {num1} + {num2} = ?
-                </div>
-                <button type="button" onClick={generateCaptcha} className="btn btn-ghost btn-circle btn-sm" title="Reload Captcha">
-                  <RefreshCw className="h-4 w-4" />
-                </button>
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            {error && (
+              <div className="alert alert-error bg-error/10 text-error border-error/20 rounded-2xl p-4 text-sm font-medium">
+                Invalid credentials. Please try again.
               </div>
-              <input
-                type="number"
-                required
-                className={`input input-bordered w-full mt-3 ${captchaError ? 'input-error' : 'focus:input-primary'}`}
-                placeholder="Enter the sum"
-                value={captchaAnswer}
-                onChange={(e) => setCaptchaAnswer(e.target.value)}
-              />
-              {captchaError && <span className="text-error text-xs mt-2">{captchaError}</span>}
-            </div>
-          </div>
+            )}
+            {validationError && (
+              <div className="alert alert-warning bg-warning/10 text-warning-content border-warning/20 rounded-2xl p-4 text-sm font-medium">
+                {validationError}
+              </div>
+            )}
+            
+            <div className="space-y-5">
+              <div className="form-control relative group">
+                <label className="label pb-1"><span className="label-text font-bold text-base-content/80 text-xs uppercase tracking-wider">Email or Username</span></label>
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-base-content/40 group-focus-within:text-primary transition-colors" />
+                  <input
+                    name="username"
+                    type="text"
+                    required
+                    className="input input-bordered w-full pl-12 bg-base-200/50 focus:bg-base-100 focus:border-primary focus:ring-4 ring-primary/10 transition-all rounded-2xl h-14"
+                    placeholder="admin@nucleus.com"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </div>
+              </div>
 
-          <div>
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="btn btn-primary w-full shadow-lg"
-            >
-              {isLoading ? (
-                <span className="loading loading-spinner loading-sm"></span>
-              ) : 'Secure Sign In'}
-            </button>
+              <div className="form-control relative group">
+                <label className="label pb-1"><span className="label-text font-bold text-base-content/80 text-xs uppercase tracking-wider">Password</span></label>
+                <div className="relative">
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-base-content/40 group-focus-within:text-primary transition-colors" />
+                  <input
+                    name="password"
+                    type="password"
+                    required
+                    className="input input-bordered w-full pl-12 bg-base-200/50 focus:bg-base-100 focus:border-primary focus:ring-4 ring-primary/10 transition-all rounded-2xl h-14"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              {/* Captcha Section */}
+              <div className="form-control mt-6 p-5 border border-base-200 rounded-2xl bg-gradient-to-br from-base-200/50 to-base-100 shadow-sm relative overflow-hidden group">
+                <div className="absolute top-0 left-0 w-1 h-full bg-primary/40 group-hover:bg-primary transition-colors"></div>
+                <label className="label pt-0 pb-3"><span className="label-text font-bold text-xs uppercase tracking-wider">Security Check</span></label>
+                <div className="flex items-center gap-3">
+                  <div className="bg-base-100 px-5 py-3 rounded-xl font-black text-xl tracking-widest text-primary border border-base-300 shadow-inner flex items-center justify-center flex-1 select-none">
+                    {num1} + {num2}
+                  </div>
+                  <button type="button" onClick={generateCaptcha} className="btn btn-square btn-ghost text-base-content/50 hover:text-primary hover:bg-primary/10" title="Reload Captcha">
+                    <RefreshCw className="h-5 w-5" />
+                  </button>
+                </div>
+                <input
+                  type="number"
+                  required
+                  className={`input input-bordered w-full mt-3 bg-base-100 rounded-xl font-bold text-center h-12 transition-all ${captchaError ? 'border-error focus:ring-error/20' : 'focus:border-primary focus:ring-primary/20 focus:ring-4'}`}
+                  placeholder="Enter the sum"
+                  value={captchaAnswer}
+                  onChange={(e) => setCaptchaAnswer(e.target.value)}
+                />
+                {captchaError && <span className="text-error text-xs font-bold mt-2 text-center block">{captchaError}</span>}
+              </div>
+            </div>
+
+            <div className="pt-2">
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="btn btn-primary w-full rounded-2xl h-14 text-base font-bold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-1 transition-all group"
+              >
+                {isLoading ? (
+                  <span className="loading loading-spinner"></span>
+                ) : (
+                  <>
+                    Secure Login
+                    <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
+
+        {/* Right Side: Image */}
+        <div className="hidden lg:block lg:w-7/12 relative bg-base-300">
+          <Image 
+            src="/images/admin/login-bg.jpg" 
+            alt="Hospital Dashboard" 
+            fill 
+            sizes="(max-width: 1024px) 0vw, 60vw"
+            className="object-cover object-center"
+            priority
+          />
+          {/* Overlays */}
+          <div className="absolute inset-0 bg-gradient-to-r from-base-100 via-transparent to-transparent opacity-90"></div>
+          <div className="absolute inset-0 bg-primary/10 mix-blend-overlay"></div>
+          
+          {/* Text content on image */}
+          <div className="absolute bottom-16 left-16 right-16 p-10 bg-white/10 backdrop-blur-xl border border-white/20 rounded-[2.5rem] shadow-2xl">
+            <h3 className="text-3xl font-black text-white mb-3">Enterprise Healthcare Management</h3>
+            <p className="text-white/80 font-medium leading-relaxed text-lg">
+              Streamline operations, manage patient records, and oversee hospital services through our next-generation secure administrative portal.
+            </p>
           </div>
-        </form>
+        </div>
+
       </div>
     </div>
   );

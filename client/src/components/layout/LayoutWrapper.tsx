@@ -7,9 +7,9 @@ import { ReactNode } from 'react';
 
 export default function LayoutWrapper({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const isAdmin = pathname.startsWith('/admin');
+  const isAdminDashboard = pathname.startsWith('/admin') && pathname !== '/admin/login';
 
-  if (isAdmin) {
+  if (isAdminDashboard) {
     return <main className="flex-grow bg-base-200">{children}</main>;
   }
 
