@@ -33,15 +33,15 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.path}
-                className={`text-lg font-medium transition-colors hover:text-primary ${
+                className={`text-base font-medium transition-colors hover:text-primary ${
                   pathname === link.path ? 'text-primary' : 'text-base-content/80'
                 }`}
               >
                 {link.name}
               </Link>
             ))}
-            <Link href="/admin" className="text-lg font-medium transition-colors text-base-content/80 hover:text-primary">
-              Admin
+            <Link href="/admin" className="btn btn-outline btn-sm rounded-full border-primary/30 text-primary hover:bg-primary hover:text-white transition-all duration-300 px-6">
+              Admin Login
             </Link>
             <Link href="/contact" className="btn border-0 bg-gradient-to-r from-primary to-accent hover:from-primary hover:to-secondary text-white rounded-full px-8 shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-0.5 transition-all duration-300">
               Book Appointment
@@ -74,10 +74,10 @@ export default function Navbar() {
             ))}
             <Link
               href="/admin"
-              className="block px-3 py-2 rounded-md text-base font-medium hover:bg-base-200"
+              className="block px-3 py-2 rounded-md text-base font-medium text-primary hover:bg-primary/10"
               onClick={() => setIsOpen(false)}
             >
-              Admin
+              Admin Login
             </Link>
             <Link href="/contact" className="block px-3 py-2 btn btn-primary w-full mt-4">Book Appointment</Link>
           </div>
