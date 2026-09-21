@@ -5,6 +5,7 @@ import ReviewsSection from "@/components/home/ReviewsSection";
 import DynamicServicesHome from "@/components/home/DynamicServicesHome";
 import FAQSection from "@/components/home/FAQSection";
 import FadeIn from "@/components/animations/FadeIn";
+import Counter from "@/components/animations/Counter";
 import AchievementsBanner from "@/components/home/AchievementsBanner";
 import DoctorsSection from "@/components/home/DoctorsSection";
 import DynamicBlogsHome from "@/components/home/DynamicBlogsHome";
@@ -104,22 +105,22 @@ export default function Home() {
 
       {/* Stats Section */}
       <FadeIn delay={0.4} direction="up" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full -mt-32 relative z-20">
-        <div className="bg-base-100/80 backdrop-blur-xl rounded-[2rem] shadow-2xl shadow-base-300/50 border border-base-200 p-8 lg:p-12">
+        <div className="bg-base-100/90 backdrop-blur-xl rounded-[2rem] shadow-2xl shadow-primary/20 border border-primary/10 p-8 lg:p-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-base-200/50">
-            <div className="text-center px-4 hover:-translate-y-1 transition-transform duration-300">
-              <p className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary mb-2">50+</p>
+            <div className="text-center px-4 hover:-translate-y-2 transition-transform duration-300 cursor-pointer">
+              <Counter to={50} suffix="+" className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary mb-2 block" />
               <p className="text-base-content/70 font-medium text-lg">Specialist Doctors</p>
             </div>
-            <div className="text-center px-4 hover:-translate-y-1 transition-transform duration-300">
-              <p className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary mb-2">24/7</p>
+            <div className="text-center px-4 hover:-translate-y-2 transition-transform duration-300 cursor-pointer">
+              <Counter to={24} suffix="/7" className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary mb-2 block" />
               <p className="text-base-content/70 font-medium text-lg">Emergency Care</p>
             </div>
-            <div className="text-center px-4 hover:-translate-y-1 transition-transform duration-300">
-              <p className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary mb-2">10k+</p>
+            <div className="text-center px-4 hover:-translate-y-2 transition-transform duration-300 cursor-pointer">
+              <Counter to={10} suffix="k+" className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary mb-2 block" />
               <p className="text-base-content/70 font-medium text-lg">Happy Patients</p>
             </div>
-            <div className="text-center px-4 hover:-translate-y-1 transition-transform duration-300">
-              <p className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary mb-2">15+</p>
+            <div className="text-center px-4 hover:-translate-y-2 transition-transform duration-300 cursor-pointer">
+              <Counter to={15} suffix="+" className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary mb-2 block" />
               <p className="text-base-content/70 font-medium text-lg">Years Experience</p>
             </div>
           </div>
