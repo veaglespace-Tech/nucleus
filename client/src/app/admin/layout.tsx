@@ -14,14 +14,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const dispatch = useDispatch();
   const router = useRouter();
   
-  // const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
 
-  // In a real app, protect these routes:
-  // useEffect(() => {
-  //   if (!isAuthenticated && pathname !== '/admin/login') {
-  //     router.push('/admin/login');
-  //   }
-  // }, [isAuthenticated, pathname, router]);
+  useEffect(() => {
+    if (!isAuthenticated && pathname !== '/admin/login') {
+      router.push('/admin/login');
+    }
+  }, [isAuthenticated, pathname, router]);
 
     const navItems = [
       { name: 'Dashboard', path: '/admin', icon: LayoutDashboard, color: 'text-primary' },

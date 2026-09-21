@@ -3,11 +3,14 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Menu, X, HeartPulse } from 'lucide-react';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,8 +64,8 @@ export default function Navbar() {
 
           {/* Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link href="/admin" className="text-sm font-bold text-base-content/50 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-primary after:transition-all after:duration-300">
-              Admin
+            <Link href={isAuthenticated ? "/admin" : "/admin/login"} className="text-sm font-bold text-base-content/50 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-primary after:transition-all after:duration-300">
+              {isAuthenticated ? "Admin" : "Login"}
             </Link>
             <Link href="/contact" className="btn border-0 bg-gradient-to-r from-primary via-secondary to-accent hover:from-primary hover:to-secondary text-white rounded-full px-8 shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/50 hover:-translate-y-1 transition-all duration-300 font-bold tracking-wide">
               Book Appointment
@@ -101,11 +104,11 @@ export default function Navbar() {
               })}
               <div className="h-px w-full bg-gradient-to-r from-transparent via-base-300 to-transparent my-4"></div>
               <Link
-                href="/admin"
+                href={isAuthenticated ? "/admin" : "/admin/login"}
                 className="block px-5 py-4 rounded-3xl text-lg font-bold text-base-content/60 hover:bg-base-200 transition-colors text-center"
                 onClick={() => setIsOpen(false)}
               >
-                Admin Access
+                {isAuthenticated ? "Admin Access" : "Login"}
               </Link>
               <Link href="/contact" onClick={() => setIsOpen(false)} className="btn border-0 bg-gradient-to-r from-primary to-accent text-white rounded-3xl w-full h-14 mt-4 shadow-xl shadow-primary/30 font-bold text-lg">
                 Book Appointment
