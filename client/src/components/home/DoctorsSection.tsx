@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ArrowRight, Star, Linkedin, Twitter, Mail } from 'lucide-react';
+import { ArrowRight, Star, Mail } from 'lucide-react';
 import FadeIn from '@/components/animations/FadeIn';
 import StaggerContainer, { StaggerItem } from '@/components/animations/StaggerContainer';
 import Link from 'next/link';
@@ -83,10 +83,10 @@ export default function DoctorsSection() {
                 {/* Social Links (Reveal on hover) */}
                 <div className="absolute top-4 right-4 flex flex-col gap-2 translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500 delay-100">
                   <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center hover:bg-primary hover:text-white transition-colors cursor-pointer text-white">
-                    <Linkedin className="h-4 w-4" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                   </div>
                   <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center hover:bg-primary hover:text-white transition-colors cursor-pointer text-white">
-                    <Twitter className="h-4 w-4" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
                   </div>
                 </div>
 
