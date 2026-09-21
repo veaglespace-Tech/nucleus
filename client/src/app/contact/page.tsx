@@ -3,8 +3,8 @@ export default function Contact() {
     <div className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center">Contact Us</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12">
-        <div className="bg-base-100 p-8 rounded-[2rem] shadow-xl shadow-base-300/50 border border-base-200 hover:shadow-2xl hover:border-primary/30 hover:-translate-y-1 transition-all duration-300">
-          <h2 className="text-2xl font-bold mb-6">Send us a message</h2>
+        <div className="bg-base-300 p-10 rounded-[2rem] border border-base-200 shadow-2xl shadow-base-300/80 hover:shadow-primary/10 transition-shadow duration-500">
+          <h2 className="text-3xl font-bold mb-6 text-base-content">Send us a message</h2>
           <form className="space-y-4">
             <div className="form-control">
               <label className="label"><span className="label-text">Name</span></label>

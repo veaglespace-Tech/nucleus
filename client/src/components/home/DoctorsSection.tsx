@@ -61,7 +61,7 @@ export default function DoctorsSection() {
 
         <StaggerContainer staggerDelay={0.15} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {doctors.map((doc, i) => (
-            <StaggerItem key={i} className="card bg-base-100 shadow-xl shadow-base-300/50 border border-base-200 hover:shadow-2xl hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 rounded-[2rem] overflow-hidden">
+            <StaggerItem key={i} className="card bg-base-100 shadow-xl shadow-base-300/50 rounded-[2rem] overflow-hidden">
               <div className="relative h-72 w-full overflow-hidden bg-base-300">
                 <Image 
                   src={doc.image} 
