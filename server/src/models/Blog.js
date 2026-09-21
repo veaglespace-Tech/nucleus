@@ -41,4 +41,5 @@ Blog.init({
 }, {
     sequelize: db_1.sequelize,
     modelName: 'Blog',
+    tableName: 'blogs',
 });

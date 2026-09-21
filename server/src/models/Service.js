@@ -36,4 +36,5 @@ Service.init({
 }, {
     sequelize: db_1.sequelize,
     modelName: 'Service',
+    tableName: 'services',
 });

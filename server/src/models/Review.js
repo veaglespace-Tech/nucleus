@@ -31,4 +31,5 @@ Review.init({
 }, {
     sequelize: db_1.sequelize,
     modelName: 'Review',
+    tableName: 'reviews',
 });
