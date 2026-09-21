@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { useGetBlogsQuery, useCreateBlogMutation, useUpdateBlogMutation, useDeleteBlogMutation } from '@/store/api/apiSlice';
-import { Plus, Edit2, Trash2 } from 'lucide-react';
+import { Plus, Edit2, Trash2, FileText, Calendar } from 'lucide-react';
 import Image from 'next/image';
+import FadeIn from '@/components/animations/FadeIn';
 
 export default function BlogsManager() {
   const { data: blogs, isLoading } = useGetBlogsQuery({});
@@ -14,38 +15,38 @@ export default function BlogsManager() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
   
-    const [formData, setFormData] = useState({
-      title: '',
-      author: '',
-      content: '',
-      image: '',
-      type: 'Post',
-      showContactBtn: true
-    });
-  
-    const handleOpenModal = (blog?: any) => {
-      if (blog) {
-        setEditingId(blog.id);
-        setFormData({
-          title: blog.title,
-          author: blog.author,
-          content: blog.content,
-          image: blog.image || '',
-          type: blog.type || 'Post',
-          showContactBtn: blog.showContactBtn ?? true
-        });
-      } else {
-        setEditingId(null);
-        setFormData({ title: '', author: '', content: '', image: '', type: 'Post', showContactBtn: true });
-      }
-      setIsModalOpen(true);
-    };
-  
-    const handleCloseModal = () => {
-      setIsModalOpen(false);
+  const [formData, setFormData] = useState({
+    title: '',
+    author: '',
+    content: '',
+    image: '',
+    type: 'Post',
+    showContactBtn: true
+  });
+
+  const handleOpenModal = (blog?: any) => {
+    if (blog) {
+      setEditingId(blog.id);
+      setFormData({
+        title: blog.title,
+        author: blog.author,
+        content: blog.content,
+        image: blog.image || '',
+        type: blog.type || 'Post',
+        showContactBtn: blog.showContactBtn ?? true
+      });
+    } else {
       setEditingId(null);
       setFormData({ title: '', author: '', content: '', image: '', type: 'Post', showContactBtn: true });
-    };
+    }
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setEditingId(null);
+    setFormData({ title: '', author: '', content: '', image: '', type: 'Post', showContactBtn: true });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,7 +64,7 @@ export default function BlogsManager() {
   };
 
   const handleDelete = async (id: number) => {
-    if (window.confirm('Are you sure you want to delete this blog post?')) {
+    if (window.confirm('Are you sure you want to delete this blog?')) {
       try {
         await deleteBlog(id).unwrap();
       } catch (err) {
@@ -73,71 +74,82 @@ export default function BlogsManager() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center bg-base-100 p-6 rounded-2xl shadow-sm border border-base-200">
-        <div>
-          <h1 className="text-2xl font-bold text-base-content">Manage Blogs</h1>
-          <p className="text-base-content/70 text-sm mt-1">Add, edit, or remove health articles and blogs.</p>
+    <div className="space-y-8 relative z-10">
+      <FadeIn delay={0.1} direction="up" className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 bg-base-100 p-8 rounded-3xl shadow-2xl shadow-base-300/50 border border-base-200/60 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="p-2 bg-secondary/10 rounded-lg text-secondary">
+              <FileText className="h-6 w-6" />
+            </div>
+            <h1 className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent">Manage Blogs</h1>
+          </div>
+          <p className="text-base-content/70 font-medium">Add, edit, or remove news and articles.</p>
         </div>
-        <button onClick={() => handleOpenModal()} className="btn btn-primary">
+        <button onClick={() => handleOpenModal()} className="btn btn-secondary rounded-full px-8 shadow-lg shadow-secondary/30 relative z-10 hover:-translate-y-0.5 transition-transform">
           <Plus className="h-5 w-5 mr-2" />
           Write Blog
         </button>
-      </div>
+      </FadeIn>
 
-      <div className="bg-base-100 rounded-2xl shadow-sm border border-base-200 overflow-hidden">
+      <FadeIn delay={0.2} direction="up" className="bg-base-100 rounded-3xl shadow-2xl shadow-base-300/50 border border-base-200/60 overflow-hidden">
         {isLoading ? (
-          <div className="p-12 text-center text-base-content/60 flex flex-col items-center">
-            <span className="loading loading-spinner loading-lg mb-4 text-primary"></span>
-            Loading blogs...
+          <div className="p-20 text-center text-base-content/60 flex flex-col items-center">
+            <span className="loading loading-spinner loading-lg mb-4 text-secondary"></span>
+            <span className="font-medium">Loading blogs...</span>
           </div>
         ) : blogs?.length === 0 ? (
-          <div className="p-12 text-center text-base-content/60">
-            No blogs found. Click "Write Blog" to create one.
+          <div className="p-20 text-center text-base-content/60 flex flex-col items-center">
+            <FileText className="h-16 w-16 mb-4 text-base-content/20" />
+            <p className="text-xl font-bold text-base-content/70 mb-2">No blogs found</p>
+            <p className="mb-6">Click "Write Blog" to create your first article.</p>
+            <button onClick={() => handleOpenModal()} className="btn btn-outline btn-secondary rounded-full">Start Writing</button>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="table w-full">
-              <thead className="bg-base-200 text-base-content">
+              <thead className="bg-base-200/50 text-base-content font-bold border-b border-base-200 uppercase text-xs tracking-wider">
                 <tr>
-                  <th>Image</th>
-                  <th>Title</th>
-                  <th>Type</th>
-                  <th>Author</th>
-                  <th className="text-right">Actions</th>
+                  <th className="py-5 px-6">Image</th>
+                  <th className="py-5 px-6">Title</th>
+                  <th className="py-5 px-6">Type</th>
+                  <th className="py-5 px-6">Author</th>
+                  <th className="py-5 px-6 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-base-200/50">
                 {blogs?.map((blog: any) => (
-                  <tr key={blog.id} className="hover">
-                    <td>
+                  <tr key={blog.id} className="hover:bg-base-200/30 transition-colors group">
+                    <td className="py-4 px-6">
                       <div className="avatar">
-                        <div className="w-12 h-12 rounded-lg bg-base-200 flex items-center justify-center overflow-hidden">
+                        <div className="w-14 h-14 rounded-xl bg-base-200/50 flex items-center justify-center overflow-hidden border border-base-200 shadow-sm">
                           {blog.image ? (
-                            <Image src={blog.image} alt={blog.title} width={48} height={48} className="object-cover w-full h-full" />
+                            <Image src={blog.image} alt={blog.title} width={56} height={56} className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" />
                           ) : (
-                            <span className="text-xs text-base-content/40">No img</span>
+                            <span className="text-[10px] font-bold text-base-content/40 uppercase tracking-wide">No img</span>
                           )}
                         </div>
                       </div>
                     </td>
-                    <td className="font-medium text-base-content max-w-xs truncate" title={blog.title}>{blog.title}</td>
-                    <td>
-                      <span className={`badge ${blog.type === 'Article' ? 'badge-secondary' : 'badge-primary'} badge-sm`}>
+                    <td className="py-4 px-6 font-bold text-base-content max-w-xs truncate" title={blog.title}>{blog.title}</td>
+                    <td className="py-4 px-6">
+                      <span className={`badge ${blog.type === 'Article' ? 'badge-secondary' : 'badge-primary'} badge-md font-medium border-0 shadow-sm`}>
                         {blog.type || 'Post'}
                       </span>
                     </td>
-                    <td className="text-base-content/70">{blog.author}</td>
-                    <td className="text-right whitespace-nowrap">
+                    <td className="py-4 px-6 text-base-content/70 font-medium">{blog.author}</td>
+                    <td className="py-4 px-6 text-right whitespace-nowrap">
                       <button 
                         onClick={() => handleOpenModal(blog)}
-                        className="btn btn-ghost btn-sm text-info hover:bg-info/10 mr-2"
+                        className="btn btn-circle btn-ghost btn-sm text-info hover:bg-info/10 mr-2"
+                        title="Edit"
                       >
                         <Edit2 className="h-4 w-4" />
                       </button>
                       <button 
                         onClick={() => handleDelete(blog.id)}
-                        className="btn btn-ghost btn-sm text-error hover:bg-error/10"
+                        className="btn btn-circle btn-ghost btn-sm text-error hover:bg-error/10"
+                        title="Delete"
                       >
                         <Trash2 className="h-4 w-4" />
                       </button>
@@ -148,23 +160,26 @@ export default function BlogsManager() {
             </table>
           </div>
         )}
-      </div>
+      </FadeIn>
 
       {isModalOpen && (
-        <div className="modal modal-open bg-black/40 backdrop-blur-sm z-50">
-          <div className="modal-box max-w-3xl bg-base-100 rounded-2xl shadow-2xl border border-base-200 p-0">
-            <div className="p-6 border-b border-base-200">
-              <h3 className="font-bold text-2xl text-base-content">
+        <div className="modal modal-open bg-black/40 backdrop-blur-md z-50">
+          <div className="modal-box max-w-4xl bg-base-100 rounded-[2rem] shadow-2xl border border-base-200/50 p-0 overflow-hidden">
+            <div className="p-8 border-b border-base-200 bg-gradient-to-r from-base-100 to-base-200/50">
+              <h3 className="font-extrabold text-2xl text-base-content flex items-center gap-3">
+                <div className="p-2 bg-secondary/10 rounded-lg text-secondary">
+                  {editingId ? <Edit2 className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+                </div>
                 {editingId ? 'Edit Blog' : 'Write New Blog'}
               </h3>
             </div>
             
-            <form onSubmit={handleSubmit} className="p-6 space-y-6">
+            <form onSubmit={handleSubmit} className="p-8 space-y-6">
               
               <div className="flex flex-col space-y-3">
-                <label className="text-sm font-semibold text-base-content/90">Blog Type *</label>
+                <label className="text-sm font-bold text-base-content/80 uppercase tracking-wide">Blog Type *</label>
                 <div className="flex gap-4">
-                  <label className="flex items-center gap-2 cursor-pointer">
+                  <label className="flex items-center gap-3 p-3 border border-base-200 rounded-xl cursor-pointer hover:bg-base-200/50 transition-colors">
                     <input 
                       type="radio" 
                       name="type" 
@@ -172,9 +187,9 @@ export default function BlogsManager() {
                       checked={formData.type === 'Post'} 
                       onChange={() => setFormData({...formData, type: 'Post'})} 
                     />
-                    <span className="font-medium">Post</span>
+                    <span className="font-bold">Post</span>
                   </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
+                  <label className="flex items-center gap-3 p-3 border border-base-200 rounded-xl cursor-pointer hover:bg-base-200/50 transition-colors">
                     <input 
                       type="radio" 
                       name="type" 
@@ -182,30 +197,30 @@ export default function BlogsManager() {
                       checked={formData.type === 'Article'} 
                       onChange={() => setFormData({...formData, type: 'Article'})} 
                     />
-                    <span className="font-medium">Article</span>
+                    <span className="font-bold">Article</span>
                   </label>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col space-y-2">
-                  <label className="text-sm font-semibold text-base-content/90">Blog Title *</label>
+                  <label className="text-sm font-bold text-base-content/80 uppercase tracking-wide">Blog Title *</label>
                   <input 
                     type="text" 
                     required
                     placeholder="e.g., Heart Health Tips" 
-                    className="input input-bordered w-full focus:input-primary transition-all duration-300 shadow-sm bg-base-50" 
+                    className="input input-bordered w-full focus:input-secondary focus:outline-none transition-all duration-300 shadow-sm bg-base-100 rounded-xl" 
                     value={formData.title}
                     onChange={e => setFormData({...formData, title: e.target.value})}
                   />
                 </div>
                 <div className="flex flex-col space-y-2">
-                  <label className="text-sm font-semibold text-base-content/90">Author Name *</label>
+                  <label className="text-sm font-bold text-base-content/80 uppercase tracking-wide">Author Name *</label>
                   <input 
                     type="text" 
                     required
                     placeholder="e.g., Dr. Smith" 
-                    className="input input-bordered w-full focus:input-primary transition-all duration-300 shadow-sm bg-base-50" 
+                    className="input input-bordered w-full focus:input-secondary focus:outline-none transition-all duration-300 shadow-sm bg-base-100 rounded-xl" 
                     value={formData.author}
                     onChange={e => setFormData({...formData, author: e.target.value})}
                   />
@@ -213,44 +228,44 @@ export default function BlogsManager() {
               </div>
               
               <div className="flex flex-col space-y-2">
-                <label className="text-sm font-semibold text-base-content/90">Cover Image URL (Optional)</label>
+                <label className="text-sm font-bold text-base-content/80 uppercase tracking-wide">Cover Image URL (Optional)</label>
                 <input 
                   type="text" 
                   placeholder="https://example.com/image.jpg" 
-                  className="input input-bordered w-full focus:input-primary transition-all duration-300 shadow-sm bg-base-50" 
+                  className="input input-bordered w-full focus:input-secondary focus:outline-none transition-all duration-300 shadow-sm bg-base-100 rounded-xl" 
                   value={formData.image}
                   onChange={e => setFormData({...formData, image: e.target.value})}
                 />
               </div>
 
               <div className="flex flex-col space-y-2">
-                <label className="text-sm font-semibold text-base-content/90">Blog Content *</label>
+                <label className="text-sm font-bold text-base-content/80 uppercase tracking-wide">Blog Content *</label>
                 <textarea 
                   required
-                  className="textarea textarea-bordered w-full h-48 focus:textarea-primary leading-relaxed transition-all duration-300 shadow-sm bg-base-50" 
-                  placeholder="Write the full blog post here..."
+                  className="textarea textarea-bordered w-full h-48 focus:textarea-secondary focus:outline-none leading-relaxed transition-all duration-300 shadow-sm bg-base-100 rounded-xl resize-none" 
+                  placeholder="Write the full content of the blog post here..."
                   value={formData.content}
                   onChange={e => setFormData({...formData, content: e.target.value})}
                 ></textarea>
               </div>
 
-              <div className="flex items-center justify-between p-4 bg-base-200/50 rounded-xl border border-base-200">
+              <div className="flex items-center justify-between p-5 bg-base-200/50 rounded-2xl border border-base-200 transition-colors hover:bg-base-200/70">
                 <div>
-                  <label className="text-sm font-semibold text-base-content/90 block">Show Contact Us Button</label>
-                  <span className="text-xs text-base-content/60">Display the contact button at the end of this blog post</span>
+                  <label className="text-sm font-bold text-base-content block mb-1">Show Contact Us Button</label>
+                  <span className="text-xs font-medium text-base-content/60">Display the contact CTA at the bottom of this blog</span>
                 </div>
                 <input 
                   type="checkbox" 
-                  className="toggle toggle-primary" 
+                  className="toggle toggle-secondary" 
                   checked={formData.showContactBtn}
                   onChange={e => setFormData({...formData, showContactBtn: e.target.checked})}
                 />
               </div>
 
-              <div className="modal-action border-t border-base-200 pt-6 mt-6">
-                <button type="button" className="btn btn-ghost rounded-xl" onClick={handleCloseModal}>Cancel</button>
-                <button type="submit" className="btn btn-primary rounded-xl px-8 shadow-lg shadow-primary/20" disabled={isCreating || isUpdating}>
-                  {isCreating || isUpdating ? <span className="loading loading-spinner loading-sm"></span> : 'Publish Blog'}
+              <div className="flex justify-end gap-3 pt-6 mt-6 border-t border-base-200">
+                <button type="button" className="btn btn-ghost rounded-full font-bold px-6" onClick={handleCloseModal}>Cancel</button>
+                <button type="submit" className="btn btn-secondary rounded-full px-8 shadow-lg shadow-secondary/30 font-bold" disabled={isCreating || isUpdating}>
+                  {isCreating || isUpdating ? <span className="loading loading-spinner loading-sm"></span> : 'Save Blog'}
                 </button>
               </div>
             </form>
