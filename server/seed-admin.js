@@ -11,7 +11,7 @@ async function seedAdmin() {
     await sequelize.sync({ alter: true });
     console.log("Database synced.");
 
-    const username = 'riteshpote0603@gmail.com';
+    const username = 'veaglespaceritesh@gmail.com';
     const password = 'Veagle@123'; // Updated password
 
     const hashedPassword = await bcrypt.hash(password, 10);
