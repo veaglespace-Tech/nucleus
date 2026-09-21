@@ -23,6 +23,13 @@ export const apiSlice = createApi({
         body: credentials,
       }),
     }),
+    updateProfile: builder.mutation({
+      query: (data) => ({
+        url: '/auth/profile',
+        method: 'PUT',
+        body: data,
+      }),
+    }),
     // Services
     getServices: builder.query({
       query: () => '/services',
@@ -118,6 +125,7 @@ export const apiSlice = createApi({
 
 export const {
   useLoginMutation,
+  useUpdateProfileMutation,
   useGetServicesQuery,
   useCreateServiceMutation,
   useUpdateServiceMutation,

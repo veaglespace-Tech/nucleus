@@ -27,6 +27,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       { name: 'Services', path: '/admin/services', icon: Activity, color: 'text-secondary' },
       { name: 'Blogs', path: '/admin/blogs', icon: FileText, color: 'text-accent' },
       { name: 'Reviews', path: '/admin/reviews', icon: Star, color: 'text-warning' },
+      { name: 'Settings', path: '/admin/settings', icon: Settings, color: 'text-info' },
     ];
 
   if (pathname === '/admin/login') {
