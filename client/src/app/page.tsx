@@ -220,16 +220,16 @@ export default function Home() {
       {/* CTA Section */}
       <FadeIn delay={0.2} direction="up" className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full mb-12 relative">
         <div className="absolute inset-0 bg-primary/20 blur-3xl -z-10 rounded-full scale-y-50"></div>
-        <div className="bg-gradient-to-br from-primary to-secondary rounded-[3rem] p-16 text-center text-primary-content shadow-2xl hover:shadow-primary/30 transition-shadow duration-500 border border-white/10">
-          <h2 className="text-4xl lg:text-5xl font-extrabold mb-6 leading-tight">Need a Medical Consultation?</h2>
-          <p className="text-xl text-primary-content/90 max-w-2xl mx-auto mb-10 leading-relaxed">
+        <div className="bg-gradient-to-br from-primary to-secondary rounded-3xl sm:rounded-[3rem] p-8 sm:p-12 lg:p-16 text-center text-primary-content shadow-2xl hover:shadow-primary/30 transition-shadow duration-500 border border-white/10">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 sm:mb-6 leading-tight">Need a Medical Consultation?</h2>
+          <p className="text-lg sm:text-xl text-primary-content/90 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed">
             Book an appointment with our expert doctors today and take the first step towards a healthier, happier life.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 w-full">
-            <Link href="/contact" className="btn btn-base-100 text-primary btn-lg rounded-full shadow-xl w-full sm:w-auto px-10 hover:scale-105 transition-transform duration-300">
+            <Link href="/contact" className="btn btn-base-100 text-primary h-12 sm:h-16 text-sm sm:text-lg rounded-full shadow-xl w-full sm:w-auto px-6 sm:px-10 hover:scale-105 transition-transform duration-300 whitespace-nowrap">
               Book Appointment Now
             </Link>
-            <Link href="/about" className="btn btn-outline text-primary-content border-primary-content hover:bg-primary-content hover:text-primary btn-lg rounded-full w-full sm:w-auto px-10 hover:scale-105 transition-transform duration-300">
+            <Link href="/about" className="btn btn-outline text-primary-content border-primary-content hover:bg-primary-content hover:text-primary h-12 sm:h-16 text-sm sm:text-lg rounded-full w-full sm:w-auto px-6 sm:px-10 hover:scale-105 transition-transform duration-300 whitespace-nowrap">
               Learn About Us
             </Link>
           </div>
