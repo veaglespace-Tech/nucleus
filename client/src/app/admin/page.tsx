@@ -1,11 +1,18 @@
-import { Users, FileText, Activity, MessageSquare, Plus, Edit } from 'lucide-react';
+'use client';
+
+import { FileText, Activity, MessageSquare, Plus, Edit } from 'lucide-react';
+import { useGetServicesQuery, useGetBlogsQuery, useGetReviewsQuery } from '@/store/api/apiSlice';
+import Link from 'next/link';
 
 export default function AdminDashboard() {
+  const { data: services } = useGetServicesQuery(undefined);
+  const { data: blogs } = useGetBlogsQuery(undefined);
+  const { data: reviews } = useGetReviewsQuery(undefined);
+
   const stats = [
-    { title: 'Total Services', value: '12', icon: Activity, color: 'from-primary/20 to-primary/5', text: 'text-primary' },
-    { title: 'Total Blogs', value: '34', icon: FileText, color: 'from-secondary/20 to-secondary/5', text: 'text-secondary' },
-    { title: 'Pending Reviews', value: '5', icon: MessageSquare, color: 'from-accent/20 to-accent/5', text: 'text-accent' },
-    { title: 'Total Patients', value: '1,204', icon: Users, color: 'from-info/20 to-info/5', text: 'text-info' },
+    { title: 'Total Services', value: services?.length || 0, icon: Activity, color: 'from-primary/20 to-primary/5', text: 'text-primary' },
+    { title: 'Total Blogs', value: blogs?.length || 0, icon: FileText, color: 'from-secondary/20 to-secondary/5', text: 'text-secondary' },
+    { title: 'Total Reviews', value: reviews?.length || 0, icon: MessageSquare, color: 'from-accent/20 to-accent/5', text: 'text-accent' },
   ];
 
   return (
@@ -18,7 +25,7 @@ export default function AdminDashboard() {
       </div>
       
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         {stats.map((stat, i) => {
           const Icon = stat.icon;
           return (
@@ -44,17 +51,21 @@ export default function AdminDashboard() {
           <div className="card-body p-6 sm:p-8">
             <h2 className="card-title mb-6 text-xl">Recent Activity</h2>
             <div className="space-y-6">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="flex items-start gap-4 p-4 rounded-2xl hover:bg-base-200/50 transition-colors">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                    <MessageSquare className="w-5 h-5 text-primary" />
+              {reviews && reviews.length > 0 ? (
+                reviews.slice(0, 3).map((review: any) => (
+                  <div key={review.id} className="flex items-start gap-4 p-4 rounded-2xl hover:bg-base-200/50 transition-colors">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                      <MessageSquare className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-base-content">New review added by {review.patientName}</p>
+                      <p className="text-sm text-base-content/60 mt-1">Rating: {review.rating}/5</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-semibold text-base-content">New review added by John Doe</p>
-                    <p className="text-sm text-base-content/60 mt-1">2 hours ago</p>
-                  </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p className="text-base-content/60">No recent activity.</p>
+              )}
             </div>
           </div>
         </div>
@@ -64,18 +75,18 @@ export default function AdminDashboard() {
           <div className="card-body p-6 sm:p-8">
             <h2 className="card-title mb-6 text-xl">Quick Actions</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <button className="btn btn-outline border-primary/20 hover:bg-primary hover:text-white h-32 flex flex-col gap-3 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 group">
+              <Link href="/admin/services" className="btn btn-outline border-primary/20 hover:bg-primary hover:text-white h-32 flex flex-col gap-3 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 group">
                 <div className="p-3 bg-primary/10 rounded-full group-hover:bg-white/20 transition-colors">
                   <Plus className="w-6 h-6 text-primary group-hover:text-white" />
                 </div>
-                <span className="font-semibold">Add New Service</span>
-              </button>
-              <button className="btn btn-outline border-secondary/20 hover:bg-secondary hover:text-white h-32 flex flex-col gap-3 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 group">
+                <span className="font-semibold">Manage Services</span>
+              </Link>
+              <Link href="/admin/blogs" className="btn btn-outline border-secondary/20 hover:bg-secondary hover:text-white h-32 flex flex-col gap-3 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 group">
                 <div className="p-3 bg-secondary/10 rounded-full group-hover:bg-white/20 transition-colors">
                   <Edit className="w-6 h-6 text-secondary group-hover:text-white" />
                 </div>
-                <span className="font-semibold">Write Blog Post</span>
-              </button>
+                <span className="font-semibold">Manage Blogs</span>
+              </Link>
             </div>
           </div>
         </div>
