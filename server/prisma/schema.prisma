@@ -8,9 +8,9 @@ datasource db {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  username String   @unique
-  password String
+  id        Int      @id @default(autoincrement())
+  username  String   @unique @db.VarChar(255)
+  password  String   @db.VarChar(255)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -19,11 +19,11 @@ model User {
 
 model Blog {
   id             Int      @id @default(autoincrement())
-  title          String
-  author         String
+  title          String   @db.VarChar(255)
+  author         String   @db.VarChar(255)
   content        String   @db.LongText
-  image          String?
-  type           String   @default("Post")
+  image          String?  @db.VarChar(255)
+  type           String   @default("Post") @db.VarChar(255)
   showContactBtn Boolean  @default(true)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
@@ -33,7 +33,7 @@ model Blog {
 
 model Review {
   id          Int      @id @default(autoincrement())
-  patientName String
+  patientName String   @db.VarChar(255)
   rating      Int
   comment     String   @db.Text
   createdAt   DateTime @default(now())
@@ -44,9 +44,9 @@ model Review {
 
 model Service {
   id             Int      @id @default(autoincrement())
-  title          String
+  title          String   @db.VarChar(255)
   description    String   @db.Text
-  icon           String?
+  icon           String?  @db.VarChar(255)
   details        String?  @db.LongText
   showContactBtn Boolean  @default(true)
   createdAt      DateTime @default(now())
