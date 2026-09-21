@@ -40,23 +40,23 @@ export default function ReviewsSection() {
               <div className="absolute top-6 right-6 text-primary/5 group-hover:text-primary/10 transition-colors duration-500">
                 <Quote className="h-24 w-24 transform rotate-180" />
               </div>
-              <div className="relative z-10">
+              <div className="relative z-10 w-full overflow-hidden">
                 <div className="flex gap-1 text-warning mb-6">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className={`h-5 w-5 ${i < review.rating ? 'fill-current' : 'opacity-30 text-base-content'}`} />
                   ))}
                 </div>
-                <p className="text-base-content/80 text-lg leading-relaxed font-medium italic mb-8">
+                <p className="text-base-content/80 text-lg leading-relaxed font-medium italic mb-8 break-words break-all">
                   "{review.comment}"
                 </p>
                 <div className="flex items-center gap-4 mt-auto border-t border-base-300/50 pt-6">
-                  <div className="avatar placeholder shadow-sm">
+                  <div className="avatar placeholder shadow-sm shrink-0">
                     <div className="bg-gradient-to-br from-primary to-accent text-white rounded-full w-14 border-2 border-base-100">
                       <span className="text-xl font-black">{review.patientName.charAt(0)}</span>
                     </div>
                   </div>
-                  <div>
-                    <h4 className="font-bold text-base-content text-lg">{review.patientName}</h4>
+                  <div className="min-w-0 flex-1">
+                    <h4 className="font-bold text-base-content text-lg truncate" title={review.patientName}>{review.patientName}</h4>
                     <p className="text-sm font-medium text-primary">Verified Patient</p>
                   </div>
                 </div>
