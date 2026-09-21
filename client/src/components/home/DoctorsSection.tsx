@@ -61,14 +61,14 @@ export default function DoctorsSection() {
 
         <StaggerContainer staggerDelay={0.15} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {doctors.map((doc, i) => (
-            <StaggerItem key={i} className="card bg-base-100 shadow-xl shadow-base-300/50 rounded-[2rem] overflow-hidden group hover:-translate-y-2 transition-transform duration-500">
+            <StaggerItem key={i} className="card bg-base-100 shadow-xl shadow-base-300/50 rounded-[2rem] overflow-hidden">
               <div className="relative h-72 w-full overflow-hidden bg-base-300">
                 <Image 
                   src={doc.image} 
                   alt={doc.name} 
                   fill 
                   sizes="(max-width: 768px) 100vw, 25vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-base-100 via-transparent to-transparent"></div>
               </div>
@@ -79,8 +79,8 @@ export default function DoctorsSection() {
                   <span className="font-medium text-base-content/90">{doc.qualifications}</span>
                   <span>{doc.experience} Experience</span>
                 </div>
-                <div className="mt-4 pt-4 border-t border-base-200 hidden group-hover:block animate-in fade-in slide-in-from-top-2 duration-300">
-                  <p className="text-sm text-base-content/70 leading-relaxed text-left">{doc.bio}</p>
+                <div className="mt-4 pt-4 border-t border-base-200">
+                  <p className="text-sm text-base-content/70 leading-relaxed text-left line-clamp-3">{doc.bio}</p>
                 </div>
                 <div className="flex items-center justify-center gap-1 mt-4 text-warning font-bold">
                   <Star className="h-5 w-5 fill-current" />
