@@ -17,13 +17,15 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-base-100/80 backdrop-blur-lg border-b border-base-200/50 sticky top-0 z-50 transition-all duration-300">
+    <nav className="bg-base-100/90 backdrop-blur-xl border-b border-primary/10 shadow-sm sticky top-0 z-50 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center gap-2">
-              <HeartPulse className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Nucleus Hospital</span>
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="bg-gradient-to-br from-primary to-accent p-2 rounded-xl group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-primary/20">
+                <HeartPulse className="h-7 w-7 text-white" />
+              </div>
+              <span className="text-2xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent">Nucleus</span>
             </Link>
           </div>
           <div className="hidden md:flex items-center space-x-8">
@@ -41,7 +43,9 @@ export default function Navbar() {
             <Link href="/admin" className="text-lg font-medium transition-colors text-base-content/80 hover:text-primary">
               Admin
             </Link>
-            <Link href="/contact" className="btn btn-primary rounded-full px-6">Book Appointment</Link>
+            <Link href="/contact" className="btn border-0 bg-gradient-to-r from-primary to-accent hover:from-primary hover:to-secondary text-white rounded-full px-8 shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-0.5 transition-all duration-300">
+              Book Appointment
+            </Link>
           </div>
           <div className="flex items-center md:hidden">
             <button

@@ -3,6 +3,22 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+@theme {
+  --color-primary: #4F46E5;
+  --color-primary-content: #ffffff;
+  --color-secondary: #EC4899;
+  --color-secondary-content: #ffffff;
+  --color-accent: #14B8A6;
+  --color-accent-content: #ffffff;
+  --color-base-100: #ffffff;
+  --color-base-200: #F8FAFC;
+  --color-base-300: #F1F5F9;
+  --color-info: #3B82F6;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+}
+
 :root {
   scroll-behavior: smooth;
   --font-inter: 'Inter', sans-serif;
@@ -47,4 +63,31 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   .modern-border {
     @apply border border-base-300 hover:border-primary/50 transition-colors duration-300;
   }
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
 }

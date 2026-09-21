@@ -13,19 +13,23 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-8 lg:gap-12 pb-16 bg-base-100 overflow-hidden">
       {/* Hero Section */}
-      <section className="relative pt-24 pb-32 overflow-hidden bg-base-200">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/10 z-0"></div>
+      <section className="relative pt-24 pb-32 overflow-hidden bg-base-100">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/20 via-base-100 to-base-100 z-0"></div>
+        <div className="absolute -top-40 -left-40 w-96 h-96 bg-secondary/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+        <div className="absolute top-0 -right-40 w-96 h-96 bg-primary/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-40 left-20 w-96 h-96 bg-accent/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             
             {/* Left Content */}
             <div className="space-y-8 animate-in fade-in slide-in-from-left duration-1000">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-medium text-sm border border-primary/20 shadow-sm">
-                <HeartPulse className="h-4 w-4 animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 text-primary font-medium text-sm border border-primary/20 shadow-sm backdrop-blur-sm">
+                <HeartPulse className="h-4 w-4 animate-pulse text-secondary" />
                 <span>Your Health, Our Top Priority</span>
               </div>
-              <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight text-base-content leading-tight">
-                Advanced <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Healthcare</span> <br />
+              <h1 className="text-5xl lg:text-7xl font-black tracking-tight text-base-content leading-[1.1]">
+                Advanced <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">Healthcare</span> <br />
                 Close To You
               </h1>
               <p className="text-xl text-base-content/80 max-w-lg leading-relaxed">
@@ -33,10 +37,10 @@ export default function Home() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Link href="/contact" className="btn btn-primary btn-lg rounded-full shadow-xl shadow-primary/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300">
+                <Link href="/contact" className="btn border-0 bg-gradient-to-r from-primary to-accent hover:from-primary hover:to-secondary text-white btn-lg rounded-full shadow-xl shadow-primary/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 px-8">
                   Book an Appointment
                 </Link>
-                <Link href="/services" className="btn btn-outline btn-lg rounded-full hover:-translate-y-1 transition-all duration-300">
+                <Link href="/services" className="btn btn-outline btn-lg rounded-full hover:-translate-y-1 hover:bg-base-200 hover:text-base-content transition-all duration-300 border-base-300 px-8">
                   Explore Services
                 </Link>
               </div>

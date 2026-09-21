@@ -23,12 +23,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   //   }
   // }, [isAuthenticated, pathname, router]);
 
-  const navItems = [
-    { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
-    { name: 'Services', path: '/admin/services', icon: Activity },
-    { name: 'Blogs', path: '/admin/blogs', icon: FileText },
-    { name: 'Reviews', path: '/admin/reviews', icon: Star },
-  ];
+    const navItems = [
+      { name: 'Dashboard', path: '/admin', icon: LayoutDashboard, color: 'text-primary' },
+      { name: 'Services', path: '/admin/services', icon: Activity, color: 'text-secondary' },
+      { name: 'Blogs', path: '/admin/blogs', icon: FileText, color: 'text-accent' },
+      { name: 'Reviews', path: '/admin/reviews', icon: Star, color: 'text-warning' },
+    ];
 
   if (pathname === '/admin/login') {
     return <>{children}</>;
@@ -46,25 +46,25 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="p-6 border-b border-base-200">
           <Link href="/" className="flex items-center gap-2 group hover:opacity-80 transition-opacity">
             <HeartPulse className="h-6 w-6 text-primary group-hover:scale-110 transition-transform" />
-            <h2 className="text-2xl font-bold text-primary">Admin Panel</h2>
+            <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Admin Panel</h2>
           </Link>
         </div>
         
         <div className="flex-1 overflow-y-auto py-4">
-          <nav className="space-y-1 px-3">
+          <nav className="space-y-2 px-3">
             {navItems.map((item) => {
               const isActive = pathname === item.path;
               return (
                 <Link
                   key={item.name}
                   href={item.path}
-                  className={`flex items-center px-4 py-3 rounded-xl transition-colors ${
+                  className={`flex items-center px-4 py-3 rounded-xl transition-all duration-300 ${
                     isActive
-                      ? 'bg-primary text-primary-content font-medium shadow-md'
-                      : 'text-base-content/70 hover:bg-base-200 hover:text-base-content'
+                      ? 'bg-gradient-to-r from-base-200 to-base-100 shadow-sm border-l-4 border-primary font-semibold text-base-content'
+                      : 'text-base-content/70 hover:bg-base-200 hover:text-base-content font-medium border-l-4 border-transparent'
                   }`}
                 >
-                  <item.icon className="h-5 w-5 mr-3" />
+                  <item.icon className={`h-5 w-5 mr-3 ${isActive ? item.color : 'text-base-content/50 group-hover:' + item.color}`} />
                   {item.name}
                 </Link>
               );
